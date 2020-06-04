@@ -12,10 +12,9 @@ let currentMove;
 // getting HTML elements
 let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let scrambler, solver;
-let canvas;
 
 function setup() {
-  canvas = createCanvas(600, 600, WEBGL);
+  createCanvas(600, 600, WEBGL);
 
   // initial color order
   colorDict = [
@@ -183,3 +182,5 @@ function draw() {
     }
   }
 }
+
+// add reverse solving function
