@@ -137,25 +137,25 @@ function draw() {
   rotateX(-PI / 6);
   rotateY(-PI / 4);
 
-  if (scramble.length == 0) {
-    scrambling = false;
-    scramble.push(new Move(true, 'x', [1], 1, 0));
+  if (autoSequence.length == 0) {
+    autoAnimating = false;
+    autoSequence.push(new Move(true, 'x', [1], 1, 0));
   }
 
-  if (scrambling) {
-    let scrambleMove = scramble[0];
-    scrambleMove.angle += 0.15;
+  if (autoAnimating) {
+    let autoMove = autoSequence[0];
+    autoMove.angle += 0.15;
 
-    if (scrambleMove.angle >= PI / 2) {
-      scramble.shift();
-      scrambleMove.resetAngle().execute();
+    if (autoMove.angle >= PI / 2) {
+      autoSequence.shift();
+      autoMove.resetAngle().execute();
 
     }
 
     for (qb of cube) {
-      if (qb.inAnimation(scrambleMove)) {
+      if (qb.inAnimation(autoMove)) {
         push();
-        scrambleMove.rotater();
+        autoMove.rotater();
         qb.draw();
         pop();
       } else {
@@ -169,6 +169,13 @@ function draw() {
 
     if (currentMove.angle >= PI / 2) {
       currentMove.toggleAnimation().resetAngle().execute();
+      
+      if (solved(cube)) {
+        history = [];
+      } else {
+        history.push(currentMove);
+      }
+
     }
 
     for (qb of cube) {
@@ -185,8 +192,15 @@ function draw() {
 }
 
 function playMove(move) {
-  if (!scrambling && !currentMove.animating) {
+  if (!autoAnimating && !currentMove.animating) {
     Object.assign(currentMove, move);
-    console.log(move);
   }
+}
+
+function solved() {
+  let OuterCubies = cube.slice(0).splice(13, 1);
+  let allColors = OuterCubies.map(c => c.colors);
+  let reference = allColors.shift();
+  
+  return allColors.every(c => arraysMatch(c, reference));
 }
