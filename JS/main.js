@@ -13,8 +13,11 @@ let currentMove;
 let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let scrambler, solver;
 
+let canvas;
+
 function setup() {
-  createCanvas(600, 600, WEBGL);
+  canvas = createCanvas(600, 600, WEBGL);
+  canvas.parent('window-wrapper')
 
   // initial color order
   colorDict = [
