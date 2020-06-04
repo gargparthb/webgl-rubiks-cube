@@ -36,24 +36,24 @@ function setup() {
     }
   }
 
-  R = select('#r').mousePressed(() => Object.assign(currentMove, r));
-  Ri = select('#ri').mousePressed(() => Object.assign(currentMove, ri));
-  L = select('#l').mousePressed(() => Object.assign(currentMove, l));
-  Li = select('#li').mousePressed(() => Object.assign(currentMove, li));
-  X = select('#x').mousePressed(() => Object.assign(currentMove, x));
-  Xi = select('#xi').mousePressed(() => Object.assign(currentMove, xi));
-  U = select('#u').mousePressed(() => Object.assign(currentMove, u));
-  Ui = select('#ui').mousePressed(() => Object.assign(currentMove, ui));
-  D = select('#d').mousePressed(() => Object.assign(currentMove, d));
-  Di = select('#di').mousePressed(() => Object.assign(currentMove, di));
-  Y = select('#y').mousePressed(() => Object.assign(currentMove, y));
-  Yi = select('#yi').mousePressed(() => Object.assign(currentMove, yi));
-  F = select('#f').mousePressed(() => Object.assign(currentMove, f));
-  Fi = select('#fi').mousePressed(() => Object.assign(currentMove, fi));
-  B = select('#b').mousePressed(() => Object.assign(currentMove, b));
-  Bi = select('#bi').mousePressed(() => Object.assign(currentMove, bi));
-  Z = select('#z').mousePressed(() => Object.assign(currentMove, z));
-  Zi = select('#zi').mousePressed(() => Object.assign(currentMove, zi));
+  R = select('#r').mousePressed(() => playMove(rMove));
+  Ri = select('#ri').mousePressed(() => playMove(riMove));
+  L = select('#l').mousePressed(() => playMove(lMove));
+  Li = select('#li').mousePressed(() => playMove(liMove));
+  X = select('#x').mousePressed(() => playMove(xMove));
+  Xi = select('#xi').mousePressed(() => playMove(xiMove));
+  U = select('#u').mousePressed(() => playMove(uMove));
+  Ui = select('#ui').mousePressed(() => playMove(uiMove));
+  D = select('#d').mousePressed(() => playMove(dMove));
+  Di = select('#di').mousePressed(() => playMove(diMove));
+  Y = select('#y').mousePressed(() => playMove(yMove));
+  Yi = select('#yi').mousePressed(() => playMove(yiMove));
+  F = select('#f').mousePressed(() => playMove(fMove));
+  Fi = select('#fi').mousePressed(() => playMove(fiMove));
+  B = select('#b').mousePressed(() => playMove(bMove));
+  Bi = select('#bi').mousePressed(() => playMove(biMove));
+  Z = select('#z').mousePressed(() => playMove(zMove));
+  Zi = select('#zi').mousePressed(() => playMove(ziMove));
   scrambler = select('#scrambler').mousePressed(startScramble);
 
   currentMove = new Move();
@@ -61,69 +61,67 @@ function setup() {
 }
 
 function keyTyped() {
-  if (!currentMove.animating) {
-    switch (key) {
-      case 'i':
-        Object.assign(currentMove, r);
-        break;
-      case 'k':
-        Object.assign(currentMove, ri);
-        break;
-      case 'd':
-        Object.assign(currentMove, l);
-        break;
-      case 'e':
-        Object.assign(currentMove, li);
-        break;
-      case 'j':
-        Object.assign(currentMove, u);
-        break;
-      case 'f':
-        Object.assign(currentMove, ui);
-        break;
-      case 's':
-        Object.assign(currentMove, d);
-        break;
-      case 'l':
-        Object.assign(currentMove, di);
-        break;
-      case 'h':
-        Object.assign(currentMove, f);
-        break;
-      case 'g':
-        Object.assign(currentMove, fi);
-        break;
-      case 'w':
-        Object.assign(currentMove, b);
-        break;
-      case 'o':
-        Object.assign(currentMove, bi);
-        break;
-      case 't':
-        Object.assign(currentMove, x);
-        break;
-      case 'y':
-        Object.assign(currentMove, x);
-        break;
-      case 'b':
-        Object.assign(currentMove, xi);
-        break;
-      case 'n':
-        Object.assign(currentMove, xi);
-        break;
-      case ';':
-        Object.assign(currentMove, y);
-        break;
-      case 'a':
-        Object.assign(currentMove, yi)
-        break;
-      case 'p':
-        Object.assign(currentMove, z);
-        break;
-      case 'q':
-        Object.assign(currentMove, zi);
-        break;
-    }
+  switch (key) {
+    case 'i':
+      playMove(rMove);
+      break;
+    case 'k':
+      playMove(riMove);
+      break;
+    case 'd':
+      playMove(lMove);
+      break;
+    case 'e':
+      playMove(liMove);
+      break;
+    case 'j':
+      playMove(uMove);
+      break;
+    case 'f':
+      playMove(uiMove);
+      break;
+    case 's':
+      playMove(dMove);
+      break;
+    case 'l':
+      playMove(diMove);
+      break;
+    case 'h':
+      playMove(fMove);
+      break;
+    case 'g':
+      playMove(fiMove);
+      break;
+    case 'w':
+      playMove(bMove);
+      break;
+    case 'o':
+      playMove(biMove);
+      break;
+    case 't':
+      playMove(xMove);
+      break;
+    case 'y':
+      playMove(xMove);
+      break;
+    case 'b':
+      playMove(xiMove);
+      break;
+    case 'n':
+      playMove(xiMove);
+      break;
+    case ';':
+      playMove(yMove);
+      break;
+    case 'a':
+      playMove(yiMove)
+      break;
+    case 'p':
+      playMove(zMove);
+      break;
+    case 'q':
+      playMove(ziMove);
+      break;
   }
 }
 
@@ -183,4 +181,9 @@ function draw() {
   }
 }
 
-// add reverse solving function
+function playMove(move) {
+  if (!scrambling && !currentMove.animating) {
+    Object.assign(currentMove, move);
+    console.log(move);
+  }
+}

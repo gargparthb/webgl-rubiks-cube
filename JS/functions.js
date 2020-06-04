@@ -44,16 +44,18 @@ function inverseMoves(m1, m2) {
 }
 
 function generateScramble() {
-  for (let i = 0; i <= 25; i++) {
-    let lastMove = scramble[scramble.length - 1];
-    let a = randomAxis();
-    let l = [floor(random(-1, 1))];
-    let d = randomDirection();
+  if (!scrambling) {
+    for (let i = 0; i <= 25; i++) {
+      let lastMove = scramble[scramble.length - 1];
+      let a = randomAxis();
+      let l = [floor(random(-1, 1))];
+      let d = randomDirection();
 
-    if (inverseMoves(lastMove, new Move(true, a, l, d, 0))) {
-      scramble.push(new Move(true, a, l, -1 * d, 0));
-    } else {
-      scramble.push(new Move(true, a, l, d, 0));
+      if (inverseMoves(lastMove, new Move(true, a, l, d, 0))) {
+        scramble.push(new Move(true, a, l, -1 * d, 0));
+      } else {
+        scramble.push(new Move(true, a, l, d, 0));
+      }
     }
   }
 }
