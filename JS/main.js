@@ -169,11 +169,13 @@ function draw() {
 
     if (currentMove.angle >= PI / 2) {
       currentMove.toggleAnimation().resetAngle().execute();
-      
+      console.log('done')
+
       if (solved(cube)) {
         history = [];
       } else {
         history.push(currentMove);
+        console.log(history);
       }
 
     }
@@ -197,10 +199,12 @@ function playMove(move) {
   }
 }
 
+
+// FIXME: solved not working correcting
 function solved() {
-  let OuterCubies = cube.slice(0).splice(13, 1);
+  let OuterCubies = cube.filter(c => c.x !== 0 || c.y !== 0 || c.z !== 0)
   let allColors = OuterCubies.map(c => c.colors);
   let reference = allColors.shift();
-  
+
   return allColors.every(c => arraysMatch(c, reference));
 }

@@ -65,3 +65,27 @@ function startScramble() {
   generateScramble();
   autoAnimating = true;
 }
+
+
+// TODO: fix after solved is working correctly
+function generateSolution() {
+  if (!autoAnimating) {
+    let unCancelled = history.reverse().map(m => m.invert());
+
+    let acc = [unCancelled[unCancelled.length - 1]];
+    console.log(acc);
+    let rest = unCancelled.splice(unCancelled.length - 1, 1);
+    console.log(rest)
+
+    for (i = rest.length - 1; i >= 0; i--) {
+      if (inverseMoves(acc[acc.length - 1], rest[0])) {
+        acc.splice(acc.length - 1, 1);
+        rest.shift();
+      } else {
+        rest.shift();
+        acc.concat(rest);
+      }
+    }
+    return acc;
+  }
+}
