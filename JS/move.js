@@ -13,6 +13,7 @@ class Move {
     this.angle = angle;
   }
 
+  // updates cube data
   execute() {
     switch (this.axis) {
       case 'x':
@@ -33,16 +34,19 @@ class Move {
     return this;
   }
 
+  // mostly for chaining
   toggleAnimation() {
     this.animating = !this.animating;
     return this;
   }
 
+  // mostly for chaining
   resetAngle() {
     this.angle = 0;
     return this;
   }
 
+  // gives correct rotater function for animating
   rotater() {
     switch (this.axis) {
       case 'x':
@@ -55,9 +59,5 @@ class Move {
         rotateZ(this.dir * this.angle);
         break;
     }
-  }
-
-  invert() {
-    this.dir *= -1;
   }
 }

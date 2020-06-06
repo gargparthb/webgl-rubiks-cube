@@ -130,6 +130,7 @@ class Cubie {
     }
   }
 
+  // given a move, check wheather this qb is animating
   inAnimation(move) {
     switch (move.axis) {
       case 'x':

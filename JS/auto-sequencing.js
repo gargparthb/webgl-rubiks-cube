@@ -1,3 +1,4 @@
+// auto sequencing constants
 let autoSequence = [new Move(true, 'x', [1], 1, 0)];
 let history = [];
 let autoAnimating = false;
@@ -40,10 +41,12 @@ function randomDirection() {
   }
 }
 
+// are these two moves invereses
 function inverseMoves(m1, m2) {
   return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && -1 * m1.dir == m2.dir);
 }
 
+// generates random scramble
 function generateScramble() {
   if (!autoAnimating) {
     for (let i = 0; i <= 25; i++) {
@@ -61,31 +64,38 @@ function generateScramble() {
   }
 }
 
+// starts the auto sequence
 function startScramble() {
   generateScramble();
   autoAnimating = true;
 }
 
 
-// TODO: fix after solved is working correctly
+// reverses history and cancels moves
 function generateSolution() {
   if (!autoAnimating) {
-    let unCancelled = history.reverse().map(m => m.invert());
+    let unCancelled = history.map(m => new Move(true, m.axis, m.layers, m.dir * -1, 0)).reverse();
 
     let acc = [unCancelled[unCancelled.length - 1]];
-    console.log(acc);
-    let rest = unCancelled.splice(unCancelled.length - 1, 1);
-    console.log(rest)
+    unCancelled.pop();
 
-    for (i = rest.length - 1; i >= 0; i--) {
-      if (inverseMoves(acc[acc.length - 1], rest[0])) {
-        acc.splice(acc.length - 1, 1);
-        rest.shift();
+    for (let i = unCancelled.length - 1; i >= 0; i--) {
+      if (inverseMoves(unCancelled[unCancelled.length - 1], acc[0])) {
+        acc.shift();
       } else {
-        rest.shift();
-        acc.concat(rest);
+        acc.unshift(unCancelled[unCancelled.length - 1]);
       }
+      unCancelled.pop();
     }
-    return acc;
+
+    autoSequence = acc;
+  }
+}
+
+// starts auto sequence
+function startSolution() {
+  if (!solved()) {
+    generateSolution();
+    autoAnimating = true;
   }
 }

@@ -1,4 +1,4 @@
-// initializes the array
+// initializes the array and colors
 let cube = [];
 let colorDict;
 
@@ -12,11 +12,11 @@ let currentMove;
 // getting HTML elements
 let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let scrambler, solver;
-
 let canvas;
 
 function setup() {
   canvas = createCanvas(600, 600, WEBGL);
+  // allows styling
   canvas.parent('window-wrapper')
 
   // initial color order
@@ -39,6 +39,7 @@ function setup() {
     }
   }
 
+  // giving html buttons functionality
   R = select('#r').mousePressed(() => playMove(rMove));
   Ri = select('#ri').mousePressed(() => playMove(riMove));
   L = select('#l').mousePressed(() => playMove(lMove));
@@ -58,11 +59,14 @@ function setup() {
   Z = select('#z').mousePressed(() => playMove(zMove));
   Zi = select('#zi').mousePressed(() => playMove(ziMove));
   scrambler = select('#scrambler').mousePressed(startScramble);
+  solver = select('#solver').mousePressed(startSolution);
 
+  // gives a setup move
   currentMove = new Move();
 
 }
 
+// processes key input
 function keyTyped() {
   switch (key) {
     case 'i':
@@ -128,33 +132,44 @@ function keyTyped() {
   }
 }
 
+// main draw loop
 function draw() {
   background(150);
 
   // allows user pan
   orbitControl(3, 3, 3);
 
+  // gives nicer view
   rotateX(-PI / 6);
   rotateY(-PI / 4);
 
+  // checks if an auto sequence is finished
   if (autoSequence.length == 0) {
+    // animating flag
     autoAnimating = false;
+    // orginal dummy move
     autoSequence.push(new Move(true, 'x', [1], 1, 0));
   }
 
   if (autoAnimating) {
+    // setting auto speed
     let autoMove = autoSequence[0];
     autoMove.angle += 0.15;
 
     if (autoMove.angle >= PI / 2) {
+      // switching through the auto sequence and saving move for history
+      history.push(Object.assign({}, autoMove));
       autoSequence.shift();
       autoMove.resetAngle().execute();
 
     }
 
+    // draws each qb of array
     for (qb of cube) {
+      // checks if qb is in the moving layer
       if (qb.inAnimation(autoMove)) {
         push();
+        // gets the correct rotater translation
         autoMove.rotater();
         qb.draw();
         pop();
@@ -163,19 +178,19 @@ function draw() {
       }
     }
   } else {
+    // does the above for the user moves
     if (currentMove.animating) {
       currentMove.angle += 0.1;
     }
 
     if (currentMove.angle >= PI / 2) {
       currentMove.toggleAnimation().resetAngle().execute();
-      console.log('done')
 
-      if (solved(cube)) {
+      // updates history
+      if (solved()) {
         history = [];
       } else {
-        history.push(currentMove);
-        console.log(history);
+        history.push(Object.assign({}, currentMove));
       }
 
     }
@@ -193,18 +208,31 @@ function draw() {
   }
 }
 
+// updates moving variable with user's, as long as no other move is occuring
 function playMove(move) {
   if (!autoAnimating && !currentMove.animating) {
     Object.assign(currentMove, move);
   }
 }
 
-
-// FIXME: solved not working correcting
+// checks to see if cube is solved
 function solved() {
-  let OuterCubies = cube.filter(c => c.x !== 0 || c.y !== 0 || c.z !== 0)
-  let allColors = OuterCubies.map(c => c.colors);
-  let reference = allColors.shift();
+  let reference = cube[0].colors;
 
-  return allColors.every(c => arraysMatch(c, reference));
+  // checks each face induvidually
+  let topColorsSame = cube.filter(c => c.y == -1).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
+  let bottomColorsSame = cube.filter(c => c.y == 1).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
+  let frontColorsSame = cube.filter(c => c.z == 1).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
+  let backColorsSame = cube.filter(c => c.z == -1).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
+  let leftColorsSame = cube.filter(c => c.x == -1).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
+  let rightColorsSame = cube.filter(c => c.x == 1).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
+
+  // does logic
+  return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
+}
+
+
+// compares two colors
+function equalColors(c1, c2) {
+  return arraysMatch(c1.levels, c2.levels);
 }
