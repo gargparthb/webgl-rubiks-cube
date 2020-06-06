@@ -1,5 +1,5 @@
 // auto sequencing constants
-let autoSequence = [new Move(true, 'x', [1], 1, 0)];
+let autoSequence = [new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0)];
 let history = [];
 let autoAnimating = false;
 
@@ -51,12 +51,16 @@ function generateScramble() {
   if (!autoAnimating) {
     for (let i = 0; i <= 25; i++) {
       let lastMove = autoSequence[autoSequence.length - 1];
+      let secondtoLastMove = autoSequence[autoSequence.length - 2];
       let a = randomAxis();
       let l = [floor(random(-1, 1))];
       let d = randomDirection();
+      let newMove = new Move(true, a, l, d, 0);
 
-      if (inverseMoves(lastMove, new Move(true, a, l, d, 0))) {
+      if (inverseMoves(lastMove, newMove)) {
         autoSequence.push(new Move(true, a, l, -1 * d, 0));
+      } else if (equalMoves(secondtoLastMove, lastMove) && equalMoves(lastMove, newMove)) {
+        // skip over new move
       } else {
         autoSequence.push(new Move(true, a, l, d, 0));
       }
@@ -70,26 +74,33 @@ function startScramble() {
   autoAnimating = true;
 }
 
+Array.prototype.last = function () {
+  return this[this.length = 1];
+}
 
-// reverses history and cancels moves
+// // reverses history and cancels moves
 function generateSolution() {
-  if (!autoAnimating) {
+  if (!autoAnimating && !solved(cube)) {
     let unCancelled = history.map(m => new Move(true, m.axis, m.layers, m.dir * -1, 0)).reverse();
+    let acc = [unCancelled.shift()];
+    let rest = unCancelled;
 
-    let acc = [unCancelled[unCancelled.length - 1]];
-    unCancelled.pop();
-
-    for (let i = unCancelled.length - 1; i >= 0; i--) {
-      if (inverseMoves(unCancelled[unCancelled.length - 1], acc[0])) {
-        acc.shift();
-      } else {
-        acc.unshift(unCancelled[unCancelled.length - 1]);
+    function cancel(acc, rest) {
+      for (move of rest) {
+        if (inverseMoves(acc.last, move)) {
+          acc.pop();
+        } else {
+          acc.push(move);
+        }
       }
-      unCancelled.pop();
+      return acc;
     }
-
-    autoSequence = acc;
+    autoSequence = cancel(acc, rest);
   }
+}
+
+function equalMoves(m1, m2) {
+  return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && m1.dir == m2.dir);
 }
 
 // starts auto sequence

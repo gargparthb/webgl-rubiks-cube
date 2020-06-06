@@ -15,7 +15,7 @@ let scrambler, solver;
 let canvas;
 
 function setup() {
-  canvas = createCanvas(window.innerWidth / 2, 600, WEBGL);
+  canvas = createCanvas(600, 600, WEBGL);
   // allows styling
   canvas.parent('window-wrapper')
 
@@ -187,7 +187,7 @@ function draw() {
       currentMove.toggleAnimation().resetAngle().execute();
 
       // updates history
-      if (solved()) {
+      if (solved(cube)) {
         history = [];
       } else {
         history.push(Object.assign({}, currentMove));
@@ -219,7 +219,6 @@ function playMove(move) {
 function solved() {
   let reference = cube[0].colors;
 
-  // checks each face induvidually
   let topColorsSame = cube.filter(c => c.y == -1).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
   let bottomColorsSame = cube.filter(c => c.y == 1).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
   let frontColorsSame = cube.filter(c => c.z == 1).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
@@ -227,7 +226,6 @@ function solved() {
   let leftColorsSame = cube.filter(c => c.x == -1).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
   let rightColorsSame = cube.filter(c => c.x == 1).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
 
-  // does logic
   return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
 }
 
