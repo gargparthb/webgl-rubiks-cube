@@ -15,7 +15,7 @@ let scrambler, solver;
 let canvas;
 
 function setup() {
-  canvas = createCanvas(600, 600, WEBGL);
+  canvas = createCanvas(window.innerWidth / 2, 600, WEBGL);
   // allows styling
   canvas.parent('window-wrapper')
 
