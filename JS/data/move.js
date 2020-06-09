@@ -1,13 +1,11 @@
 class Move {
   constructor(animating, axis, layers, dir, angle) {
-
+    // animating flag
     this.animating = animating;
-
     // cubie location
     this.axis = axis;
     // layer is an array to allow multiple layer movement (rotation, wide moves)
     this.layers = layers;
-
     // move data
     this.dir = dir;
     this.angle = angle;

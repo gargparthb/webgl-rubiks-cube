@@ -14,10 +14,14 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let scrambler, solver;
 let canvas;
 
+let len;
+
 function setup() {
-  canvas = createCanvas(600, 600, WEBGL);
+  canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
   // allows styling
   canvas.parent('window-wrapper')
+
+  len = canvas.width / 8;
 
   // initial color order
   colorDict = [
@@ -132,6 +136,11 @@ function keyTyped() {
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth / 2, windowHeight * .95);
+  len = canvas.width / 7;
+}
+
 // main draw loop
 function draw() {
   background(150);
@@ -147,21 +156,22 @@ function draw() {
   if (autoSequence.length == 0) {
     // animating flag
     autoAnimating = false;
-    // orginal dummy move
-    autoSequence.push(new Move(true, 'x', [1], 1, 0));
+    // orginal dummy moves
+    autoSequence.push(new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0));
   }
 
   if (autoAnimating) {
     // setting auto speed
     let autoMove = autoSequence[0];
-    autoMove.angle += 0.15;
+    autoMove.angle += 0.1;
 
     if (autoMove.angle >= PI / 2) {
+
       // switching through the auto sequence and saving move for history
-      history.push(Object.assign({}, autoMove));
       autoSequence.shift();
       autoMove.resetAngle().execute();
 
+      updateHistory(autoMove);
     }
 
     // draws each qb of array
@@ -185,14 +195,7 @@ function draw() {
 
     if (currentMove.angle >= PI / 2) {
       currentMove.toggleAnimation().resetAngle().execute();
-
-      // updates history
-      if (solved(cube)) {
-        history = [];
-      } else {
-        history.push(Object.assign({}, currentMove));
-      }
-
+      updateHistory(currentMove);
     }
 
     for (qb of cube) {
@@ -229,8 +232,15 @@ function solved() {
   return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
 }
 
-
 // compares two colors
 function equalColors(c1, c2) {
   return arraysMatch(c1.levels, c2.levels);
+}
+
+function updateHistory(move) {
+  if (solved(cube)) {
+    history = [];
+  } else {
+    history.push(Object.assign({}, move));
+  }
 }

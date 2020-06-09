@@ -3,12 +3,12 @@ button {
   border: none;
   color: white;
   text-align: center;
-
-  padding: 10px 10px;
-  width: 100px;
-  height: 40px;
+  padding: 10px 30px;
   margin: 10px;
+}
 
+canvas {
+  border-radius: 10px;
 }
 
 #container {
@@ -26,15 +26,9 @@ button {
 #button-wrapper {
   display: flexbox;
   flex-flow: row wrap;
-  align-content: space-between;
-
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
   width: 40%;
   float: right;
-  margin-top: 220px;
-
-}
-
-canvas {
-  border-radius: 10px;
-  margin: 30px;
 }

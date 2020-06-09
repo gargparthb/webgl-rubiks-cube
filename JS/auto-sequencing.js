@@ -41,11 +41,6 @@ function randomDirection() {
   }
 }
 
-// are these two moves invereses
-function inverseMoves(m1, m2) {
-  return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && -1 * m1.dir == m2.dir);
-}
-
 // generates random scramble
 function generateScramble() {
   if (!autoAnimating) {
@@ -53,7 +48,7 @@ function generateScramble() {
       let lastMove = autoSequence[autoSequence.length - 1];
       let secondtoLastMove = autoSequence[autoSequence.length - 2];
       let a = randomAxis();
-      let l = [floor(random(-1, 1))];
+      let l = generateLayer();
       let d = randomDirection();
       let newMove = new Move(true, a, l, d, 0);
 
@@ -68,39 +63,70 @@ function generateScramble() {
   }
 }
 
+function generateLayer() {
+  if (random() < 0.5) {
+    return [-1];
+  } else {
+    return [1];
+  }
+}
+
 // starts the auto sequence
 function startScramble() {
   generateScramble();
   autoAnimating = true;
 }
 
-Array.prototype.last = function () {
-  return this[this.length = 1];
+function last(a) {
+  return a[a.length - 1];
 }
 
 // // reverses history and cancels moves
 function generateSolution() {
   if (!autoAnimating && !solved(cube)) {
     let unCancelled = history.map(m => new Move(true, m.axis, m.layers, m.dir * -1, 0)).reverse();
-    let acc = [unCancelled.shift()];
-    let rest = unCancelled;
 
-    function cancel(acc, rest) {
-      for (move of rest) {
-        if (inverseMoves(acc.last, move)) {
-          acc.pop();
-        } else {
-          acc.push(move);
-        }
-      }
-      return acc;
-    }
-    autoSequence = cancel(acc, rest);
+    //let target = unCancelled.splice(0, 2);
+    //console.log(target);
+
+    autoSequence = cancel(unCancelled);
   }
 }
 
+function cancel(moves) {
+  target = moves.splice(0, 1);
+
+  for (move of moves) {
+    if (inverseMoves(last(target), move)) {
+      target.pop();
+    } else {
+      target.push(move);
+    }
+  }
+
+  for (let i = target.length - 1; i >= 0; i--) {
+    if (equalMoves(target[i - 2], target[i - 1]) && equalMoves(target[i - 1], target[i])) {
+      target[i].dir *= -1;
+      target.splice(i - 2, 2);
+    }
+  }
+
+  return target;
+}
+
 function equalMoves(m1, m2) {
-  return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && m1.dir == m2.dir);
+  if (m1 != undefined && m2 != undefined) {
+    return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && m1.dir == m2.dir);
+  } else {
+    return false;
+  }
+}
+
+// are these two moves invereses
+function inverseMoves(m1, m2) {
+  if (m1 != undefined && m2 != undefined) {
+    return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && -1 * m1.dir == m2.dir);
+  }
 }
 
 // starts auto sequence

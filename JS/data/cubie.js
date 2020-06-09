@@ -1,4 +1,4 @@
-const len = 90;
+const stickerOffset = 10;
 
 class Cubie {
   constructor(x, y, z, colors, idx, highlight) {
@@ -35,7 +35,7 @@ class Cubie {
       translate(0, nDist, 0);
       fill(this.colors[0]);
       rotateX(PI / 2);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -46,7 +46,7 @@ class Cubie {
       fill(255, 255, 0);
       fill(this.colors[1])
       rotateX(PI / 2);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -55,7 +55,7 @@ class Cubie {
       push();
       translate(0, 0, pDist);
       fill(this.colors[2]);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -64,7 +64,7 @@ class Cubie {
       push();
       translate(0, 0, nDist);
       fill(this.colors[3]);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -74,7 +74,7 @@ class Cubie {
       translate(nDist, 0, 0)
       fill(this.colors[4]);
       rotateY(PI / 2);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -84,7 +84,7 @@ class Cubie {
       translate(pDist, 0, 0)
       fill(this.colors[5]);
       rotateY(PI / 2);
-      plane(len - 5, len - 5, 2);
+      plane(len - stickerOffset, len - stickerOffset, 2);
       pop();
     }
 
@@ -93,8 +93,6 @@ class Cubie {
   }
   // takes the move and rotates the cubie's colors
   updateColors(axis, dir) {
-    // container
-    let newColors = [];
 
     // just for readabiliy
     const up = this.colors[0];
