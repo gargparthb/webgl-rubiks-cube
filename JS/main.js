@@ -14,6 +14,7 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let scrambler, solver;
 let canvas;
 
+// drawing variables
 let len;
 
 function setup() {
@@ -65,7 +66,7 @@ function setup() {
   scrambler = select('#scrambler').mousePressed(startScramble);
   solver = select('#solver').mousePressed(startSolution);
 
-  // gives a setup move
+  // gives a dummy setup move
   currentMove = new Move();
 
 }
@@ -136,9 +137,10 @@ function keyTyped() {
   }
 }
 
+// reponsive web design
 function windowResized() {
   resizeCanvas(windowWidth / 2, windowHeight * .95);
-  len = canvas.width / 7;
+  len = canvas.width / 9;
 }
 
 // main draw loop
@@ -175,18 +177,8 @@ function draw() {
     }
 
     // draws each qb of array
-    for (qb of cube) {
-      // checks if qb is in the moving layer
-      if (qb.inAnimation(autoMove)) {
-        push();
-        // gets the correct rotater translation
-        autoMove.rotater();
-        qb.draw();
-        pop();
-      } else {
-        qb.draw();
-      }
-    }
+    drawCube(autoMove);
+
   } else {
     // does the above for the user moves
     if (currentMove.animating) {
@@ -198,16 +190,7 @@ function draw() {
       updateHistory(currentMove);
     }
 
-    for (qb of cube) {
-      if (currentMove.animating && qb.inAnimation(currentMove)) {
-        push();
-        currentMove.rotater();
-        qb.draw();
-        pop();
-      } else {
-        qb.draw();
-      }
-    }
+    drawCube(currentMove);
   }
 }
 
@@ -242,5 +225,18 @@ function updateHistory(move) {
     history = [];
   } else {
     history.push(Object.assign({}, move));
+  }
+}
+
+function drawCube(move) {
+  for (qb of cube) {
+    if (qb.inAnimation(move) && move.animating) {
+      push();
+      move.rotater();
+      qb.draw();
+      pop();
+    } else {
+      qb.draw();
+    }
   }
 }

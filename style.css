@@ -18,6 +18,7 @@ canvas {
 
 #window-wrapper {
   width: 50%;
+  margin: 0.8%;
   float: left;
   justify-content: center;
   align-items: center;

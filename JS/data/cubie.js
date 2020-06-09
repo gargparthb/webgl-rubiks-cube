@@ -1,4 +1,4 @@
-const stickerOffset = 10;
+const stickerOffset = 12;
 
 class Cubie {
   constructor(x, y, z, colors, idx, highlight) {
@@ -22,6 +22,7 @@ class Cubie {
     if (this.highlight) {
       this.colors = [color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0)]
     }
+    noStroke();
 
     push();
     angleMode(RADIANS);
