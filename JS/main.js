@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let dims = 4;
+let order = 3;
 let rangeStart, rangeEnd;
 
 // initializing move object
@@ -29,8 +29,14 @@ function setup() {
     color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
   ];
 
-  rangeStart = 1 - ceil(dims / 2);
-  rangeEnd = dims - ceil(dims / 2);
+  if (order % 2 == 0) {
+    layers = order + 1;
+  } else {
+    layers = order;
+  }
+
+  rangeStart = 1 - ceil(layers / 2);
+  rangeEnd = layers - ceil(layers / 2);
 
   // creates the cube array
   // in the n x n x n cube, n is flexible this way

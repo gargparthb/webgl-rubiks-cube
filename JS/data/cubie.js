@@ -15,82 +15,83 @@ class Cubie {
   }
 
   draw() {
-    // the offsets from the center of the mini-cube
-    const nDist = (-1 * len / 2) - 1
-    const pDist = len / 2 + 1
+    if (!(order % 2 == 0) || ![this.x, this.y, this.z].includes(0)) {
+      // the offsets from the center of the mini-cube
+      const nDist = (-1 * len / 2) - 1
+      const pDist = len / 2 + 1
 
-    if (this.highlight) {
-      this.colors = [color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0)]
-    }
-    noStroke();
+      if (this.highlight) {
+        this.colors = [color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0)]
+      }
+      noStroke();
 
-    push();
-    angleMode(RADIANS);
-    translate(this.x * len, this.y * len, this.z * len)
-    fill(0);
-    box(len);
-
-    // TOP
-    if (this.y == rangeStart) {
       push();
-      translate(0, nDist, 0);
-      fill(this.colors[0]);
-      rotateX(PI / 2);
-      plane(len - stickerOffset, len - stickerOffset, 2);
+      angleMode(RADIANS);
+      translate(this.x * len, this.y * len, this.z * len)
+      fill(0);
+      box(len);
+
+      // TOP
+      if (this.y == rangeStart) {
+        push();
+        translate(0, nDist, 0);
+        fill(this.colors[0]);
+        rotateX(PI / 2);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
+      // BOTTOM
+      if (this.y == rangeEnd) {
+        push();
+        translate(0, pDist, 0);
+        fill(255, 255, 0);
+        fill(this.colors[1])
+        rotateX(PI / 2);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
+      // FRONT
+      if (this.z == rangeEnd) {
+        push();
+        translate(0, 0, pDist);
+        fill(this.colors[2]);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
+      // BACK
+      if (this.z == rangeStart) {
+        push();
+        translate(0, 0, nDist);
+        fill(this.colors[3]);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
+      // LEFT
+      if (this.x == rangeStart) {
+        push();
+        translate(nDist, 0, 0)
+        fill(this.colors[4]);
+        rotateY(PI / 2);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
+      // RIGHT
+      if (this.x == rangeEnd) {
+        push();
+        translate(pDist, 0, 0)
+        fill(this.colors[5]);
+        rotateY(PI / 2);
+        plane(len - stickerOffset, len - stickerOffset, 2);
+        pop();
+      }
+
       pop();
     }
-
-    // BOTTOM
-    if (this.y == rangeEnd) {
-      push();
-      translate(0, pDist, 0);
-      fill(255, 255, 0);
-      fill(this.colors[1])
-      rotateX(PI / 2);
-      plane(len - stickerOffset, len - stickerOffset, 2);
-      pop();
-    }
-
-    // FRONT
-    if (this.z == rangeEnd) {
-      push();
-      translate(0, 0, pDist);
-      fill(this.colors[2]);
-      plane(len - stickerOffset, len - stickerOffset, 2);
-      pop();
-    }
-
-    // BACK
-    if (this.z == rangeStart) {
-      push();
-      translate(0, 0, nDist);
-      fill(this.colors[3]);
-      plane(len - stickerOffset, len - stickerOffset, 2);
-      pop();
-    }
-
-    // LEFT
-    if (this.x == rangeStart) {
-      push();
-      translate(nDist, 0, 0)
-      fill(this.colors[4]);
-      rotateY(PI / 2);
-      plane(len - stickerOffset, len - stickerOffset, 2);
-      pop();
-    }
-
-    // RIGHT
-    if (this.x == rangeEnd) {
-      push();
-      translate(pDist, 0, 0)
-      fill(this.colors[5]);
-      rotateY(PI / 2);
-      plane(len - stickerOffset, len - stickerOffset, 2);
-      pop();
-    }
-
-    pop();
-
   }
   // takes the move and rotates the cubie's colors
   updateColors(axis, dir) {
