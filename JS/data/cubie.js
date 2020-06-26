@@ -28,6 +28,7 @@ class Cubie {
       push();
       angleMode(RADIANS);
       translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z))
+      //translate(this.x * len, this.y * len, this.z * len)
       fill(0);
       box(len);
 
@@ -158,5 +159,7 @@ function translateOffset(coord) {
     } else {
       return (coord + 0.5) * len
     }
+  } else {
+    return coord * len;
   }
 }

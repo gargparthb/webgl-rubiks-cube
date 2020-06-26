@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let order = 2
+let order = 3;
 let rangeStart, rangeEnd;
 
 // initializing move object
@@ -22,7 +22,7 @@ function setup() {
   // allows styling
   canvas.parent('window-wrapper')
 
-  len = canvas.width / 8;
+  len = canvas.width / 10;
 
   // initial color order
   colorDict = [
