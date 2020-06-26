@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let order = 3;
+let order = 2
 let rangeStart, rangeEnd;
 
 // initializing move object
@@ -29,6 +29,7 @@ function setup() {
     color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
   ];
 
+  // creates invisible layer
   if (order % 2 == 0) {
     layers = order + 1;
   } else {

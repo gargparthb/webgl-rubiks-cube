@@ -15,7 +15,7 @@ class Cubie {
   }
 
   draw() {
-    if (!(order % 2 == 0) || ![this.x, this.y, this.z].includes(0)) {
+    if (!this.inInvisableLayer()) {
       // the offsets from the center of the mini-cube
       const nDist = (-1 * len / 2) - 1
       const pDist = len / 2 + 1
@@ -23,11 +23,11 @@ class Cubie {
       if (this.highlight) {
         this.colors = [color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0)]
       }
-      noStroke();
 
+      noStroke();
       push();
       angleMode(RADIANS);
-      translate(this.x * len, this.y * len, this.z * len)
+      translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z))
       fill(0);
       box(len);
 
@@ -93,6 +93,11 @@ class Cubie {
       pop();
     }
   }
+
+  inInvisableLayer() {
+    return (order % 2 == 0) && [this.x, this.y, this.z].includes(0);
+  }
+
   // takes the move and rotates the cubie's colors
   updateColors(axis, dir) {
 
@@ -142,6 +147,16 @@ class Cubie {
       case 'z':
         return move.layers.includes(this.z);
         break;
+    }
+  }
+}
+
+function translateOffset(coord) {
+  if (order % 2 == 0) {
+    if (coord > 0) {
+      return (coord - 0.5) * len
+    } else {
+      return (coord + 0.5) * len
     }
   }
 }
