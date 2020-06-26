@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let dims = 3;
+let dims = 4;
 let rangeStart, rangeEnd;
 
 // initializing move object

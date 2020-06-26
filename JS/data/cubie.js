@@ -31,7 +31,7 @@ class Cubie {
     box(len);
 
     // TOP
-    if (this.y == -1) {
+    if (this.y == rangeStart) {
       push();
       translate(0, nDist, 0);
       fill(this.colors[0]);
@@ -41,7 +41,7 @@ class Cubie {
     }
 
     // BOTTOM
-    if (this.y == 1) {
+    if (this.y == rangeEnd) {
       push();
       translate(0, pDist, 0);
       fill(255, 255, 0);
@@ -52,7 +52,7 @@ class Cubie {
     }
 
     // FRONT
-    if (this.z == 1) {
+    if (this.z == rangeEnd) {
       push();
       translate(0, 0, pDist);
       fill(this.colors[2]);
@@ -61,7 +61,7 @@ class Cubie {
     }
 
     // BACK
-    if (this.z == -1) {
+    if (this.z == rangeStart) {
       push();
       translate(0, 0, nDist);
       fill(this.colors[3]);
@@ -70,7 +70,7 @@ class Cubie {
     }
 
     // LEFT
-    if (this.x == -1) {
+    if (this.x == rangeStart) {
       push();
       translate(nDist, 0, 0)
       fill(this.colors[4]);
@@ -80,7 +80,7 @@ class Cubie {
     }
 
     // RIGHT
-    if (this.x == 1) {
+    if (this.x == rangeEnd) {
       push();
       translate(pDist, 0, 0)
       fill(this.colors[5]);
