@@ -1,0 +1,80 @@
+button {
+  background-color: salmon;
+  border-style: solid;
+  border-color: salmon;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  font-family: monospace;
+  font-size: large;
+  padding: 0.5em 1.5em;
+  margin: 0.5em;
+  -webkit-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
+
+button:hover {
+  color: salmon;
+  background-color: white;
+}
+
+canvas {
+  border-radius: 10px;
+}
+
+#container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#window-wrapper {
+  width: 50%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#button-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 5em;
+  width: 40%;
+}
+
+p {
+  font-family: monospace;
+  color: salmon;
+  font-size: xx-large;
+}
+
+#order-label-wrapper {
+  margin: 0.5em;
+}
+/*# sourceMappingURL=style.css.map */
