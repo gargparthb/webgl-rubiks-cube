@@ -44,7 +44,7 @@ function randomDirection() {
 // generates random scramble
 function generateScramble() {
   if (!autoAnimating) {
-    for (let i = 0; i <= 25; i++) {
+    for (let i = 0; i <= (13 * order - 17); i++) {
       let lastMove = autoSequence[autoSequence.length - 1];
       let secondtoLastMove = autoSequence[autoSequence.length - 2];
       let a = randomAxis();
@@ -64,11 +64,7 @@ function generateScramble() {
 }
 
 function generateLayer() {
-  if (random() < 0.5) {
-    return [-1];
-  } else {
-    return [1];
-  }
+  return [floor(map(random(), 0, 1, rangeStart, rangeEnd))];
 }
 
 // starts the auto sequence
@@ -81,7 +77,7 @@ function last(a) {
   return a[a.length - 1];
 }
 
-// // reverses history and cancels moves
+// reverses history and cancels moves
 function generateSolution() {
   if (!autoAnimating && !solved(cube)) {
     let unCancelled = history.map(m => new Move(true, m.axis, m.layers, m.dir * -1, 0)).reverse();

@@ -37,29 +37,14 @@ function setup() {
     color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
   ];
 
-  // creates invisible layer
-  if (order % 2 == 0) {
-    layers = order + 1;
-  } else {
-    layers = order;
-  }
+  slider = createSlider(2, 5, 3, 1);
+  slider.parent('slider-wrapper');
 
-  rangeStart = 1 - ceil(layers / 2);
-  rangeEnd = layers - ceil(layers / 2);
+  createCube(order);
+  slider.input(createCube);
 
   initializeMoveDict();
 
-  // creates the cube array
-  // in the n x n x n cube, n is flexible this way
-  let idx = 0;
-  for (var x = rangeStart; x <= rangeEnd; x++) {
-    for (var y = rangeStart; y <= rangeEnd; y++) {
-      for (var z = rangeStart; z <= rangeEnd; z++) {
-        cube.push(new Cubie(x, y, z, colorDict, idx, false));
-        idx++;
-      }
-    }
-  }
 
   // giving html buttons functionality
   R = select('#r').mouseClicked(() => playMove(rMove));
@@ -94,8 +79,6 @@ function setup() {
   Zi = select('#zi').mousePressed(() => playMove(ziMove));
   scrambler = select('#scrambler').mousePressed(startScramble);
   solver = select('#solver').mousePressed(startSolution);
-
-  slider = createSlider(2, 5, 3, 1);
 
   // gives a dummy setup move
   currentMove = new Move();
@@ -270,12 +253,12 @@ function playMove(move) {
 function solved() {
   let reference = cube[0].colors;
 
-  let topColorsSame = cube.filter(c => c.y == -1).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
-  let bottomColorsSame = cube.filter(c => c.y == 1).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
-  let frontColorsSame = cube.filter(c => c.z == 1).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
-  let backColorsSame = cube.filter(c => c.z == -1).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
-  let leftColorsSame = cube.filter(c => c.x == -1).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
-  let rightColorsSame = cube.filter(c => c.x == 1).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
+  let topColorsSame = cube.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
+  let bottomColorsSame = cube.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
+  let frontColorsSame = cube.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
+  let backColorsSame = cube.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
+  let leftColorsSame = cube.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
+  let rightColorsSame = cube.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
 
   return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
 }
@@ -291,6 +274,36 @@ function updateHistory(move) {
   } else {
     history.push(Object.assign({}, move));
   }
+}
+
+function createCube(order) {
+  cube = [];
+
+  // creates invisible layer
+  if (order % 2 == 0) {
+    layers = order + 1;
+  } else {
+    layers = order;
+  }
+
+  rangeStart = 1 - ceil(layers / 2);
+  rangeEnd = layers - ceil(layers / 2);
+
+  // creates the cube array
+  // in the n x n x n cube, n is flexible this way
+  let idx = 0;
+  for (var x = rangeStart; x <= rangeEnd; x++) {
+    for (var y = rangeStart; y <= rangeEnd; y++) {
+      for (var z = rangeStart; z <= rangeEnd; z++) {
+        cube.push(new Cubie(x, y, z, colorDict, idx, false));
+        idx++;
+      }
+    }
+  }
+}
+
+function newCube() {
+  createCube(slider.value);
 }
 
 function drawCube(move) {

@@ -20,15 +20,10 @@ class Cubie {
       const nDist = (-1 * len / 2) - 1
       const pDist = len / 2 + 1
 
-      if (this.highlight) {
-        this.colors = [color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0), color(255, 0, 0)]
-      }
-
       noStroke();
       push();
       angleMode(RADIANS);
       translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z))
-      //translate(this.x * len, this.y * len, this.z * len)
       fill(0);
       box(len);
 
