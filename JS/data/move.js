@@ -59,6 +59,7 @@ class Move {
     }
   }
 
+  // turns the move into the outer two layers
   makeWide() {
     if (this.layers[0] > 0) {
       return new Move(true, this.axis, [rangeEnd - 1, rangeEnd], this.dir, 0);

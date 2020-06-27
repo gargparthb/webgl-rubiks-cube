@@ -13,6 +13,7 @@ class Cubie {
   }
 
   draw() {
+    // don't draw on the invisable layer on even ordered
     if (!this.inInvisableLayer()) {
       // the offsets from the center of the mini-cube
       const nDist = (-1 * len / 2) - 1
@@ -21,6 +22,7 @@ class Cubie {
       noStroke();
       push();
       angleMode(RADIANS);
+      // even cubes need to be offset to account of invisable layer
       translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z))
       fill(0);
       box(len);
@@ -88,6 +90,7 @@ class Cubie {
     }
   }
 
+  // deMorgans law
   inInvisableLayer() {
     return (order % 2 == 0) && [this.x, this.y, this.z].includes(0);
   }
@@ -145,6 +148,7 @@ class Cubie {
   }
 }
 
+// squeezes things into the invisable layer
 function translateOffset(coord) {
   if (order % 2 == 0) {
     if (coord > 0) {

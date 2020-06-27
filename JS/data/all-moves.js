@@ -1,4 +1,6 @@
 // all moves dictionary
+
+// can be called everytime order changes
 function initializeMoveDict() {
     rMove = new Move(true, 'x', [rangeEnd], 1, 0);
     riMove = new Move(true, 'x', [rangeEnd], -1, 0);

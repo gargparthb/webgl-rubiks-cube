@@ -24,6 +24,7 @@ function equalColors(c1, c2) {
     return arraysMatch(c1.levels, c2.levels);
 }
 
+// adds the move to the history array
 function updateHistory(move) {
     if (solved(cube)) {
         history = [];
@@ -32,14 +33,17 @@ function updateHistory(move) {
     }
 }
 
+// allows for scaling
 function calculateStickerOffset() {
     stickerOffset = 0.2 * len;
 }
 
+// also for scaling
 function calculateLen() {
     len = canvas.width / (4 * order)
 }
 
+// updates the cube with a new layer
 function createCube(n) {
     cube = [];
     order = n;
@@ -65,15 +69,17 @@ function createCube(n) {
             }
         }
     }
-
+    // rescales the move ranges
     initializeMoveDict();
 }
 
+// slider callback
 function newCube() {
     createCube(this.value());
     orderLabel.html(this.value() + 'x' + this.value());
 }
 
+// iterates through each qb while drawing
 function drawCube(move) {
     for (qb of cube) {
         if (qb.inAnimation(move) && move.animating) {

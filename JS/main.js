@@ -30,6 +30,7 @@ function setup() {
   // allows styling
   canvas.parent('window-wrapper')
 
+  // initilizing drawing variables
   calculateLen();
   calculateStickerOffset();
 
@@ -38,13 +39,16 @@ function setup() {
     color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
   ];
 
+  // adding slider
   slider = createSlider(2, 5, 3, 1);
   slider.parent('slider-wrapper');
   slider.input(newCube);
 
+  // the label of order
   orderLabel = createP(slider.value() + 'x' + slider.value());
   orderLabel.parent('order-label-wrapper');
 
+  // makes cube
   createCube(order);
 
   // giving html buttons functionality
