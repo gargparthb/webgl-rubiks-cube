@@ -1,11 +1,12 @@
 button {
-  background-color: #FF8C69;
+  background-color: salmon;
   border: none;
   color: white;
   text-align: center;
-  padding: 10px 30px;
-  margin: 10px;
+  padding: 0.5em 1.5em;
+  margin: 0.5em;
   font-family: monospace;
+  font-size: large;
 }
 
 canvas {
@@ -21,8 +22,6 @@ canvas {
 
 #window-wrapper {
   width: 50%;
-  margin: 0.8%;
-  float: left;
   justify-content: center;
   align-items: center;
 }
@@ -34,13 +33,6 @@ canvas {
   align-items: center;
   margin-left: 5em;
   width: 40%;
-  float: right;
-}
-
-.annoucement {
-  color: salmon;
-  text-align: center;
-  font-family: monospace;
 }
 
 p {
@@ -50,5 +42,5 @@ p {
 }
 
 #order-label-wrapper {
-  margin: 10px;
+  margin: 0.5em;
 }

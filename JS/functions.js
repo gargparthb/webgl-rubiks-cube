@@ -1,60 +1,20 @@
-// updates moving variable with user's, as long as no other move is occuring
-function playMove(move) {
-    if (!autoAnimating && !currentMove.animating) {
-        Object.assign(currentMove, move)
-    }
-}
-
-// checks to see if cube is solved
-function solved() {
-    let visible = visibleQbs(cube);
-    let reference = visible[0].colors;
-
-    let topColorsSame = visible.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
-    let bottomColorsSame = visible.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
-    let frontColorsSame = visible.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
-    let backColorsSame = visible.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
-    let leftColorsSame = visible.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
-    let rightColorsSame = visible.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
-
-    return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
-}
-
-// negates the invisible layer on even order cubes
-function visibleQbs(array) {
-    let target = [];
-
-    for (qb of array) {
-        if (!qb.inInvisibleLayer()) {
-            target.push(qb);
-        }
-    }
-
-    return target;
-}
-
-// compares two colors
-function equalColors(c1, c2) {
-    return arraysMatch(c1.levels, c2.levels);
-}
-
-// adds the move to the history array
-function updateHistory(move) {
-    if (solved(cube)) {
-        history = [];
-    } else {
-        history.push(Object.assign({}, move));
-    }
-}
-
 // allows for scaling
+function calculateLen() {
+    len = canvas.width / (4 * order)
+}
+
+// also for scaling
 function calculateStickerOffset() {
     stickerOffset = 0.2 * len;
 }
 
-// also for scaling
-function calculateLen() {
-    len = canvas.width / (4 * order)
+// slider callback
+function newCube() {
+    // prevents cross algorithms
+    autoAnimating = false;
+    createCube(this.value());
+    // updates label
+    orderLabel.html(this.value() + 'x' + this.value());
 }
 
 // updates the cube with a new layer
@@ -91,13 +51,48 @@ function createCube(n) {
     initializeMoveDict();
 }
 
-// slider callback
-function newCube() {
-    // prevents cross algorithms
-    autoAnimating = false;
-    createCube(this.value());
-    // updates label
-    orderLabel.html(this.value() + 'x' + this.value());
+// updates moving variable with user's, as long as no other move is occuring
+function playMove(move) {
+    if (!autoAnimating && !currentMove.animating) {
+        Object.assign(currentMove, move)
+    }
+}
+
+// adds the move to the history array
+function updateHistory(move) {
+    if (solved(cube)) {
+        history = [];
+    } else {
+        history.push(Object.assign({}, move));
+    }
+}
+
+// checks to see if cube is solved
+function solved() {
+    let visible = visibleQbs(cube);
+    let reference = visible[0].colors;
+
+    let topColorsSame = visible.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
+    let bottomColorsSame = visible.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
+    let frontColorsSame = visible.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
+    let backColorsSame = visible.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
+    let leftColorsSame = visible.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
+    let rightColorsSame = visible.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
+
+    return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
+}
+
+// negates the invisible layer on even order cubes
+function visibleQbs(array) {
+    let target = [];
+
+    for (qb of array) {
+        if (!qb.inInvisibleLayer()) {
+            target.push(qb);
+        }
+    }
+
+    return target;
 }
 
 // iterates through each qb while drawing

@@ -3,21 +3,6 @@ let autoSequence = [new Move(true, 'x', [rangeStart], 1, 0), new Move(true, 'y',
 let history = [];
 let autoAnimating = false;
 
-function arraysMatch(arr1, arr2) {
-
-  // Check if the arrays are the same length
-  if (arr1.length !== arr2.length) return false;
-
-  // Check if all items exist and are in the same order
-  for (var i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i])
-      return false;
-  }
-
-  // Otherwise, return true
-  return true;
-
-};
 
 function randomAxis() {
   switch (floor(random(0, 3))) {
@@ -34,11 +19,7 @@ function randomAxis() {
 }
 
 function randomDirection() {
-  if (random(0, 2) < 1) {
-    return dir = 1;
-  } else {
-    return dir = -1;
-  }
+  return random([-1, 1]);
 }
 
 // generates random scramble
@@ -46,7 +27,7 @@ function generateScramble() {
   if (!autoAnimating) {
     scramble = [];
     // move count is scaled to the cube order
-    for (let i = 0; i <= (13 * order - 17); i++) {
+    for (let i = 0; i <= (15 * order - 20); i++) {
       let a = randomAxis();
       let l = generateLayer();
       let d = randomDirection();
@@ -61,9 +42,7 @@ function generateLayer() {
   return [random(removeZero(allNumsBetween(rangeStart, rangeEnd)))];
 }
 
-function removeZero(array) {
-  return array.filter(i => i != 0);
-}
+
 
 // starts the auto sequence
 function startScramble() {

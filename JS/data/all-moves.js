@@ -21,13 +21,3 @@ function initializeMoveDict() {
     zMove = new Move(true, 'z', allNumsBetween(rangeStart, rangeEnd), 1, 0);
     ziMove = new Move(true, 'z', allNumsBetween(rangeStart, rangeEnd), -1, 0);
 }
-
-function allNumsBetween(n, m) {
-    let result = [];
-
-    for (i = n; i <= m; i++) {
-        result.push(i);
-    }
-
-    return result;
-}
