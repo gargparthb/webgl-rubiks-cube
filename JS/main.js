@@ -213,10 +213,7 @@ function draw() {
 
   // checks if an auto sequence is finished
   if (autoSequence.length == 0) {
-    // animating flag
-    autoAnimating = false;
-    // orginal dummy moves
-    autoSequence.push(new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0));
+    finishAutoSequence();
   }
 
   if (autoAnimating) {
@@ -224,7 +221,7 @@ function draw() {
     let autoMove = autoSequence[0];
     autoMove.angle += 0.1;
 
-    if (autoMove.angle >= PI / 2) {
+    if (autoMove.doneAnimating()) {
 
       // switching through the auto sequence and saving move for history
       autoMove.resetAngle().execute();
@@ -242,7 +239,7 @@ function draw() {
       currentMove.angle += 0.1;
     }
 
-    if (currentMove.angle >= PI / 2) {
+    if (currentMove.doneAnimating()) {
       currentMove.toggleAnimation().resetAngle().execute();
       updateHistory(currentMove);
     }

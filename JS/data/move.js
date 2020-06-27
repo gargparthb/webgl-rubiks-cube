@@ -67,4 +67,8 @@ class Move {
       return new Move(true, this.axis, [rangeStart, rangeStart + 1], this.dir, 0);
     }
   }
+
+  doneAnimating() {
+    return this.angle >= PI / 2;
+  }
 }

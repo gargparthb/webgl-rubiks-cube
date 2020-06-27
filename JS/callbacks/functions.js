@@ -58,6 +58,13 @@ function playMove(move) {
     }
 }
 
+function finishAutoSequence() {
+    // animating flag
+    autoAnimating = false;
+    // orginal dummy moves
+    autoSequence.push(new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0));
+}
+
 // adds the move to the history array
 function updateHistory(move) {
     if (solved(cube)) {
