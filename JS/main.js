@@ -227,13 +227,13 @@ function draw() {
     if (autoMove.angle >= PI / 2) {
 
       // switching through the auto sequence and saving move for history
-      autoSequence.shift();
       autoMove.resetAngle().execute();
+      autoSequence.shift();
 
       updateHistory(autoMove);
     }
 
-    // draws each qb of array
+    // draws each qb of array with the auto rotation
     drawCube(autoMove);
 
   } else {

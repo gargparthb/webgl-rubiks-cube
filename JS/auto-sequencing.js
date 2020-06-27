@@ -1,5 +1,5 @@
 // auto sequencing constants
-let autoSequence = [new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0)];
+let autoSequence = [new Move(true, 'x', [rangeStart], 1, 0), new Move(true, 'y', [rangeStart], 1, 0)];
 let history = [];
 let autoAnimating = false;
 
@@ -58,7 +58,11 @@ function generateScramble() {
 }
 
 function generateLayer() {
-  return [floor(map(random(), 0, 1, rangeStart, rangeEnd))];
+  return [random(removeZero(allNumsBetween(rangeStart, rangeEnd)))];
+}
+
+function removeZero(array) {
+  return array.filter(i => i != 0);
 }
 
 // starts the auto sequence
