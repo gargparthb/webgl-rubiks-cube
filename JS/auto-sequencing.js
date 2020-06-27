@@ -44,23 +44,16 @@ function randomDirection() {
 // generates random scramble
 function generateScramble() {
   if (!autoAnimating) {
+    scramble = [];
     // move count is scaled to the cube order
     for (let i = 0; i <= (13 * order - 17); i++) {
-      let lastMove = autoSequence[autoSequence.length - 1];
-      let secondtoLastMove = autoSequence[autoSequence.length - 2];
       let a = randomAxis();
       let l = generateLayer();
       let d = randomDirection();
-      let newMove = new Move(true, a, l, d, 0);
-
-      if (inverseMoves(lastMove, newMove)) {
-        autoSequence.push(new Move(true, a, l, -1 * d, 0));
-      } else if (equalMoves(secondtoLastMove, lastMove) && equalMoves(lastMove, newMove)) {
-        // skip over new move
-      } else {
-        autoSequence.push(new Move(true, a, l, d, 0));
-      }
+      scramble.push(new Move(true, a, l, d, 0));
     }
+
+    autoSequence = cancel(scramble);
   }
 }
 
