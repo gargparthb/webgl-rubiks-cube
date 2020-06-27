@@ -36,6 +36,10 @@ function calculateStickerOffset() {
     stickerOffset = 0.2 * len;
 }
 
+function calculateLen() {
+    len = canvas.width / (4 * order)
+}
+
 function createCube(n) {
     cube = [];
     order = n;
@@ -67,6 +71,7 @@ function createCube(n) {
 
 function newCube() {
     createCube(this.value());
+    orderLabel.html(this.value() + 'x' + this.value());
 }
 
 function drawCube(move) {

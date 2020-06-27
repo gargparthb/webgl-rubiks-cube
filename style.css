@@ -42,3 +42,13 @@ canvas {
   text-align: center;
   font-family: monospace;
 }
+
+p {
+  font-family: monospace;
+  color: salmon;
+  font-size: xx-large;
+}
+
+#order-label-wrapper {
+  margin: 10px;
+}

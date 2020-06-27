@@ -14,13 +14,13 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let Rw, Rwi, Lw, Lwi, Uw, Uwi, Dw, Dwi, Fw, Fwi, Bw, Bwi;
 let scrambler, solver;
 let canvas;
+let slider, orderLabel;
 
+// moves
 let rMove, riMove, lMove, liMove;
 let uMove, uiMove, dMove, diMove;
 let fMove, fiMove, bMove, biMove;
 let xMove, xiMove, yMove, yiMove, zMove, ziMove;
-
-let slider;
 
 // drawing variables
 let len, stickerOffset;
@@ -30,7 +30,7 @@ function setup() {
   // allows styling
   canvas.parent('window-wrapper')
 
-  len = canvas.width / (5 * order)
+  calculateLen();
   calculateStickerOffset();
 
   // initial color order
@@ -41,6 +41,9 @@ function setup() {
   slider = createSlider(2, 5, 3, 1);
   slider.parent('slider-wrapper');
   slider.input(newCube);
+
+  orderLabel = createP(slider.value() + 'x' + slider.value());
+  orderLabel.parent('order-label-wrapper');
 
   createCube(order);
 
@@ -186,7 +189,7 @@ function keyTyped() {
 // reponsive web design
 function windowResized() {
   resizeCanvas(windowWidth / 2, windowHeight * .95);
-  len = canvas.width / (5 * order)
+  calculateLen();
   calculateStickerOffset();
 }
 
