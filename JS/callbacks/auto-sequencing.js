@@ -42,16 +42,10 @@ function generateLayer() {
   return [random(removeZero(allNumsBetween(rangeStart, rangeEnd)))];
 }
 
-
-
 // starts the auto sequence
 function startScramble() {
   generateScramble();
   autoAnimating = true;
-}
-
-function last(a) {
-  return a[a.length - 1];
 }
 
 // reverses history and cancels moves

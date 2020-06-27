@@ -35,3 +35,7 @@ function allNumsBetween(n, m) {
 
     return result;
 }
+
+function last(array) {
+    return array[array.length - 1]
+}
