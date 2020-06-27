@@ -59,7 +59,10 @@ function calculateLen() {
 
 // updates the cube with a new layer
 function createCube(n) {
+    // clears cube
     cube = [];
+
+    // initializes new order
     order = n;
 
     // creates invisible layer
@@ -69,11 +72,11 @@ function createCube(n) {
         layers = n;
     }
 
+    // shifts the range
     rangeStart = 1 - ceil(layers / 2);
     rangeEnd = layers - ceil(layers / 2);
 
     // creates the cube array
-    // in the n x n x n cube, n is flexible this way
     let idx = 0;
     for (var x = rangeStart; x <= rangeEnd; x++) {
         for (var y = rangeStart; y <= rangeEnd; y++) {
@@ -83,20 +86,24 @@ function createCube(n) {
             }
         }
     }
+
     // rescales the move ranges
     initializeMoveDict();
 }
 
 // slider callback
 function newCube() {
+    // prevents cross algorithms
     autoAnimating = false;
     createCube(this.value());
+    // updates label
     orderLabel.html(this.value() + 'x' + this.value());
 }
 
 // iterates through each qb while drawing
 function drawCube(move) {
     for (qb of cube) {
+        // draws the animating layer if any
         if (qb.inAnimation(move) && move.animating) {
             push();
             move.rotater();

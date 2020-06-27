@@ -195,6 +195,7 @@ function keyTyped() {
 // reponsive web design
 function windowResized() {
   resizeCanvas(windowWidth / 2, windowHeight * .95);
+  // rescales cube
   calculateLen();
   calculateStickerOffset();
 }
