@@ -1,5 +1,3 @@
-const stickerOffset = 12;
-
 class Cubie {
   constructor(x, y, z, colors, idx, highlight) {
     // this is the location relative to the orgin (0, 0, 0)

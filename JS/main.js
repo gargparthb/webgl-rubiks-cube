@@ -23,14 +23,15 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 let slider;
 
 // drawing variables
-let len;
+let len, stickerOffset;
 
 function setup() {
   canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
   // allows styling
   canvas.parent('window-wrapper')
 
-  len = canvas.width / 10;
+  len = canvas.width / (5 * order)
+  calculateStickerOffset();
 
   // initial color order
   colorDict = [
@@ -185,7 +186,8 @@ function keyTyped() {
 // reponsive web design
 function windowResized() {
   resizeCanvas(windowWidth / 2, windowHeight * .95);
-  len = canvas.width / 9;
+  len = canvas.width / (5 * order)
+  calculateStickerOffset();
 }
 
 // main draw loop

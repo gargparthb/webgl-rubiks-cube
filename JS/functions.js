@@ -32,6 +32,10 @@ function updateHistory(move) {
     }
 }
 
+function calculateStickerOffset() {
+    stickerOffset = 0.2 * len;
+}
+
 function createCube(n) {
     cube = [];
     order = n;
@@ -62,7 +66,6 @@ function createCube(n) {
 }
 
 function newCube() {
-    console.log(5);
     createCube(this.value());
 }
 
