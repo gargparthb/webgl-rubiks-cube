@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let order = 5;
+let order = 3;
 let rangeStart, rangeEnd;
 
 // initializing move object
@@ -39,12 +39,9 @@ function setup() {
 
   slider = createSlider(2, 5, 3, 1);
   slider.parent('slider-wrapper');
+  slider.input(newCube);
 
   createCube(order);
-  slider.input(createCube);
-
-  initializeMoveDict();
-
 
   // giving html buttons functionality
   R = select('#r').mouseClicked(() => playMove(rMove));

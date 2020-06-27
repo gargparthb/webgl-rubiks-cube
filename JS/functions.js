@@ -58,9 +58,11 @@ function createCube(n) {
         }
     }
 
+    initializeMoveDict();
 }
 
 function newCube() {
+    console.log(5);
     createCube(this.value());
 }
 
