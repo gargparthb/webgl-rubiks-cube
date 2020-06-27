@@ -3,7 +3,7 @@ let cube = [];
 let colorDict;
 
 // setting dimensions
-let order = 3;
+let order = 5;
 let rangeStart, rangeEnd;
 
 // initializing move object
@@ -276,14 +276,15 @@ function updateHistory(move) {
   }
 }
 
-function createCube(order) {
+function createCube(n) {
   cube = [];
+  order = n;
 
   // creates invisible layer
-  if (order % 2 == 0) {
-    layers = order + 1;
+  if (n % 2 == 0) {
+    layers = n + 1;
   } else {
-    layers = order;
+    layers = n;
   }
 
   rangeStart = 1 - ceil(layers / 2);
@@ -300,10 +301,11 @@ function createCube(order) {
       }
     }
   }
+
 }
 
 function newCube() {
-  createCube(slider.value);
+  createCube(this.value());
 }
 
 function drawCube(move) {
