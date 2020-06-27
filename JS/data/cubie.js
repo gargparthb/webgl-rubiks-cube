@@ -14,7 +14,7 @@ class Cubie {
 
   draw() {
     // don't draw on the invisable layer on even ordered
-    if (!this.inInvisableLayer()) {
+    if (!this.inInvisibleLayer()) {
       // the offsets from the center of the mini-cube
       const nDist = (-1 * len / 2) - 1
       const pDist = len / 2 + 1
@@ -91,7 +91,7 @@ class Cubie {
   }
 
   // deMorgans law
-  inInvisableLayer() {
+  inInvisibleLayer() {
     return (order % 2 == 0) && [this.x, this.y, this.z].includes(0);
   }
 

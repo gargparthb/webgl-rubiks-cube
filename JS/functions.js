@@ -7,16 +7,30 @@ function playMove(move) {
 
 // checks to see if cube is solved
 function solved() {
-    let reference = cube[0].colors;
+    let visible = visibleQbs(cube);
+    let reference = visible[0].colors;
 
-    let topColorsSame = cube.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
-    let bottomColorsSame = cube.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
-    let frontColorsSame = cube.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
-    let backColorsSame = cube.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
-    let leftColorsSame = cube.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
-    let rightColorsSame = cube.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
+    let topColorsSame = visible.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
+    let bottomColorsSame = visible.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
+    let frontColorsSame = visible.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
+    let backColorsSame = visible.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
+    let leftColorsSame = visible.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
+    let rightColorsSame = visible.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
 
     return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
+}
+
+// negates the invisible layer on even order cubes
+function visibleQbs(array) {
+    let target = [];
+
+    for (qb of array) {
+        if (!qb.inInvisibleLayer()) {
+            target.push(qb);
+        }
+    }
+
+    return target;
 }
 
 // compares two colors
