@@ -58,4 +58,12 @@ class Move {
         break;
     }
   }
+
+  makeWide() {
+    if (this.layers[0] > 0) {
+      return new Move(true, this.axis, [rangeEnd - 1, rangeEnd], this.dir, 0);
+    } else {
+      return new Move(true, this.axis, [rangeStart, rangeStart + 1], this.dir, 0);
+    }
+  }
 }

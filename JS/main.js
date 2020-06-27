@@ -11,8 +11,16 @@ let currentMove;
 
 // getting HTML elements
 let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
+let Rw, Rwi, Lw, Lwi, Uw, Uwi, Dw, Dwi, Fw, Fwi, Bw, Bwi;
 let scrambler, solver;
 let canvas;
+
+let rMove, riMove, lMove, liMove;
+let uMove, uiMove, dMove, diMove;
+let fMove, fiMove, bMove, biMove;
+let xMove, xiMove, yMove, yiMove, zMove, ziMove;
+
+let slider;
 
 // drawing variables
 let len;
@@ -39,6 +47,8 @@ function setup() {
   rangeStart = 1 - ceil(layers / 2);
   rangeEnd = layers - ceil(layers / 2);
 
+  initializeMoveDict();
+
   // creates the cube array
   // in the n x n x n cube, n is flexible this way
   let idx = 0;
@@ -52,26 +62,40 @@ function setup() {
   }
 
   // giving html buttons functionality
-  R = select('#r').mousePressed(() => playMove(rMove));
+  R = select('#r').mouseClicked(() => playMove(rMove));
   Ri = select('#ri').mousePressed(() => playMove(riMove));
+  Rw = select('#rw').mouseClicked(() => playMove(rMove.makeWide()));
+  Rwi = select('#rwi').mousePressed(() => playMove(riMove.makeWide()));
   L = select('#l').mousePressed(() => playMove(lMove));
   Li = select('#li').mousePressed(() => playMove(liMove));
+  Lw = select('#lw').mouseClicked(() => playMove(lMove.makeWide()));
+  Lwi = select('#lwi').mousePressed(() => playMove(liMove.makeWide()));
   X = select('#x').mousePressed(() => playMove(xMove));
   Xi = select('#xi').mousePressed(() => playMove(xiMove));
   U = select('#u').mousePressed(() => playMove(uMove));
   Ui = select('#ui').mousePressed(() => playMove(uiMove));
+  Uw = select('#uw').mouseClicked(() => playMove(uMove.makeWide()));
+  Uwi = select('#uwi').mousePressed(() => playMove(uiMove.makeWide()));
   D = select('#d').mousePressed(() => playMove(dMove));
   Di = select('#di').mousePressed(() => playMove(diMove));
+  Dw = select('#dw').mouseClicked(() => playMove(dMove.makeWide()));
+  Dwi = select('#dwi').mousePressed(() => playMove(diMove.makeWide()));
   Y = select('#y').mousePressed(() => playMove(yMove));
   Yi = select('#yi').mousePressed(() => playMove(yiMove));
   F = select('#f').mousePressed(() => playMove(fMove));
   Fi = select('#fi').mousePressed(() => playMove(fiMove));
+  Fw = select('#fw').mouseClicked(() => playMove(fMove.makeWide()));
+  Fwi = select('#fwi').mousePressed(() => playMove(fiMove.makeWide()));
   B = select('#b').mousePressed(() => playMove(bMove));
   Bi = select('#bi').mousePressed(() => playMove(biMove));
+  Bw = select('#bw').mouseClicked(() => playMove(bMove.makeWide()));
+  Bwi = select('#bwi').mousePressed(() => playMove(biMove.makeWide()));
   Z = select('#z').mousePressed(() => playMove(zMove));
   Zi = select('#zi').mousePressed(() => playMove(ziMove));
   scrambler = select('#scrambler').mousePressed(startScramble);
   solver = select('#solver').mousePressed(startSolution);
+
+  slider = createSlider(2, 5, 3, 1);
 
   // gives a dummy setup move
   currentMove = new Move();
@@ -87,11 +111,23 @@ function keyTyped() {
     case 'k':
       playMove(riMove);
       break;
+    case 'u':
+      playMove(rMove.makeWide());
+      break;
+    case 'm':
+      playMove(riMove.makeWide());
+      break;
     case 'd':
       playMove(lMove);
       break;
     case 'e':
       playMove(liMove);
+      break;
+    case 'v':
+      playMove(lMove.makeWide());
+      break;
+    case 'r':
+      playMove(liMove.makeWide());
       break;
     case 'j':
       playMove(uMove);
@@ -99,23 +135,45 @@ function keyTyped() {
     case 'f':
       playMove(uiMove);
       break;
+    case ',':
+      playMove(uMove.makeWide());
+      break;
+    case 'c':
+      playMove(uiMove.makeWide());
     case 's':
       playMove(dMove);
       break;
     case 'l':
       playMove(diMove);
       break;
+    case 'z':
+      playMove(dMove.makeWide());
+      break;
+    case '/':
+      playMove(diMove.makeWide());
     case 'h':
       playMove(fMove);
       break;
     case 'g':
       playMove(fiMove);
       break;
+    case '7':
+      playMove(fMove.makeWide());
+      break;
+    case '4':
+      playMove(fiMove.makeWide());
+      break;
     case 'w':
       playMove(bMove);
       break;
     case 'o':
       playMove(biMove);
+      break;
+    case '2':
+      playMove(bMove.makeWide());
+      break;
+    case '9':
+      playMove(biMove.makeWide());
       break;
     case 't':
       playMove(xMove);
@@ -204,7 +262,7 @@ function draw() {
 // updates moving variable with user's, as long as no other move is occuring
 function playMove(move) {
   if (!autoAnimating && !currentMove.animating) {
-    Object.assign(currentMove, move);
+    Object.assign(currentMove, move)
   }
 }
 
