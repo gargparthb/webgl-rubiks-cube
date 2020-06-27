@@ -25,6 +25,8 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 // drawing variables
 let len, stickerOffset;
 
+
+
 function setup() {
   canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
   // allows styling

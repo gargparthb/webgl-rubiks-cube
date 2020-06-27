@@ -75,6 +75,7 @@ function createCube(n) {
 
 // slider callback
 function newCube() {
+    autoAnimating = false;
     createCube(this.value());
     orderLabel.html(this.value() + 'x' + this.value());
 }
