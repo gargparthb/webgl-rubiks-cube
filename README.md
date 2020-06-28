@@ -14,6 +14,7 @@ This is an interactive Rubik's Cube, that uses a 3D renderer in the browser
 - Animating Turns
 - Auto scrambling and solving
 - Keyboard and Button controls
+- Multiple Graphics Options
 
 
 ![Cube Screenshot](assets/cube-screenshot.png "Title")
