@@ -77,7 +77,7 @@ class Cubie {
       // LEFT
       if (this.x == rangeStart) {
         push();
-        translate(nDist, 0, 0)
+        translate(nDist, 0, 0);
         fill(this.colors[4]);
         rotateY(PI / 2);
         plane(len - stickerOffset, len - stickerOffset, 2);
@@ -87,7 +87,7 @@ class Cubie {
       // RIGHT
       if (this.x == rangeEnd) {
         push();
-        translate(pDist, 0, 0)
+        translate(pDist, 0, 0);
         fill(this.colors[5]);
         rotateY(PI / 2);
         plane(len - stickerOffset, len - stickerOffset, 2);

@@ -41,12 +41,10 @@ function setup() {
   initializeColorDict();
 
   // adding slider
-  slider = createSlider(2, 5, 3, 1);
-  slider.parent('slider-wrapper').addClass('slider').input(newCube);
+  slider = createSlider(1, 5, 3, 1).parent('slider-wrapper').addClass('slider').input(newCube);
 
   // the label of order
-  orderLabel = createP(slider.value() + 'x' + slider.value())
-    .parent('order-label-wrapper');
+  orderLabel = createP(slider.value() + 'x' + slider.value()).parent('order-label-wrapper');
 
   // spd mode box
   spdModeChkBox = select('#spd-chkbox').changed(toggleMode);
@@ -205,7 +203,7 @@ function draw() {
   background(150);
 
   // allows user pan
-  orbitControl(3, 3, 3);
+  orbitControl();
 
   // gives better view
   setView();
