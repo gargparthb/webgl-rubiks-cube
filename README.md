@@ -18,3 +18,4 @@ This is an interactive Rubik's Cube, that uses a 3D renderer in the browser
 
 
 ![Cube Screenshot](assets/cube-screenshot.png "Title")
+![Speed Cube Screenshot](assets/spd-cube-screenshot.png "Title")
