@@ -84,17 +84,24 @@ function updateHistory(move) {
 
 // checks to see if cube is solved
 function solved() {
-    let visible = visibleQbs(cube);
+    let visible = visibleQbs(cube)
     let reference = visible[0].colors;
 
-    let topColorsSame = uniformLayerColor(visible, y, rangeStart, 0, reference);
-    let bottomColorsSame = uniformLayerColor(visible, y, rangeEnd, 1, reference);
-    let frontColorsSame = uniformLayerColor(visible, z, rangeEnd, 2, reference);
-    let backColorsSame = uniformLayerColor(visible, z, rangeStart, 3, reference);
-    let leftColorsSame = uniformLayerColor(visible, x, rangeStart, 4, reference);
-    let rightColorsSame = uniformLayerColor(visible, x, rangeEnd, 5, reference);
+    let topColorsSame = uniformLayerColor(visible, 'y', rangeStart, 0, reference);
+    let bottomColorsSame = uniformLayerColor(visible, 'y', rangeEnd, 1, reference);
+    let frontColorsSame = uniformLayerColor(visible, 'z', rangeEnd, 2, reference);
+    let backColorsSame = uniformLayerColor(visible, 'z', rangeStart, 3, reference);
+    let leftColorsSame = uniformLayerColor(visible, 'x', rangeStart, 4, reference);
+    let rightColorsSame = uniformLayerColor(visible, 'x', rangeEnd, 5, reference);
 
     return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
+}
+
+function uniformLayerColor(qbs, axis, layer, side, reference) {
+    let target = qbs.filter(qb => qb[axis] == layer)
+        .map(qb => qb.colors[side])
+        .every(c => equalColors(c, reference[side]))
+    return target;
 }
 
 // negates the invisible layer on even order cubes
@@ -153,13 +160,4 @@ function incremenMoveAngle(speed, move) {
     } else {
         move.angle += 0.1;
     }
-}
-
-function uniformLayerColor(qbs, axis, layer, side, reference) {
-
-    qbs.filter(qb => qb.axis == layer)
-        .map(qb => qb[side])
-        .every(i => equalColors(i, reference[side]));
-
-    return qbs;
 }
