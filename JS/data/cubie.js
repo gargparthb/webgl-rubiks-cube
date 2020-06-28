@@ -32,7 +32,7 @@ class Cubie {
       }
 
       // the cube for each qb
-      box(len / 2);
+      box(len);
 
       // draws each sticker induvidually
 
