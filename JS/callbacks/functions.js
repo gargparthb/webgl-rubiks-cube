@@ -5,13 +5,19 @@ function calculateLen() {
 
 // also for scaling
 function calculateStickerOffset() {
-    stickerOffset = 0.1 * len;
+    stickerOffset = 0.2 * len;
 }
 
 // initializes solved color dictionary
 function initializeColorDict() {
+    // order - U, D, F, B, L, R
     colorDict = [
-        color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
+        color(255, 255, 255),
+        color(255, 255, 50),
+        color(0, 255, 0),
+        color(0, 0, 255),
+        color(255, 160, 0),
+        color(255, 0, 0)
     ];
 }
 
@@ -26,8 +32,9 @@ function newCube() {
 
 // makes a cube array given the order
 function createCube(n) {
-    // clears cube
+    // clears cube and history
     cube = [];
+    history = [];
 
     // initializes new order
     order = n;
@@ -76,8 +83,10 @@ function finishAutoSequence() {
 // adds the move to the history array
 function updateHistory(move) {
     if (solved(cube)) {
+        // clears if cube is now solved
         history = [];
     } else {
+        // adds move copy object
         history.push(Object.assign({}, move));
     }
 }
@@ -86,17 +95,19 @@ function updateHistory(move) {
 function solved() {
     let visible = visibleQbs(cube)
     let reference = visible[0].colors;
+    let cMap = [];
 
-    let topColorsSame = uniformLayerColor(visible, 'y', rangeStart, 0, reference);
-    let bottomColorsSame = uniformLayerColor(visible, 'y', rangeEnd, 1, reference);
-    let frontColorsSame = uniformLayerColor(visible, 'z', rangeEnd, 2, reference);
-    let backColorsSame = uniformLayerColor(visible, 'z', rangeStart, 3, reference);
-    let leftColorsSame = uniformLayerColor(visible, 'x', rangeStart, 4, reference);
-    let rightColorsSame = uniformLayerColor(visible, 'x', rangeEnd, 5, reference);
+    cMap.push(uniformLayerColor(visible, 'y', rangeStart, 0, reference),
+        uniformLayerColor(visible, 'y', rangeEnd, 1, reference),
+        uniformLayerColor(visible, 'z', rangeEnd, 2, reference),
+        uniformLayerColor(visible, 'z', rangeStart, 3, reference),
+        uniformLayerColor(visible, 'x', rangeStart, 4, reference),
+        uniformLayerColor(visible, 'x', rangeEnd, 5, reference));
 
-    return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
+    return cMap.every(i => i);
 }
 
+// isolates and matches a layer's color to reference
 function uniformLayerColor(qbs, axis, layer, side, reference) {
     let target = qbs.filter(qb => qb[axis] == layer)
         .map(qb => qb.colors[side])
