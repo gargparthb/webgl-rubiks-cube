@@ -27,6 +27,8 @@ let len, stickerOffset;
 let spdMode = false;
 
 function setup() {
+  frameRate(60);
+
   canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
   // allows styling
   canvas.parent('window-wrapper')
@@ -36,22 +38,18 @@ function setup() {
   calculateStickerOffset();
 
   // initial color order
-  colorDict = [
-    color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
-  ];
+  initializeColorDict();
 
   // adding slider
   slider = createSlider(2, 5, 3, 1);
-  slider.parent('slider-wrapper');
-  slider.addClass('slider')
-  slider.input(newCube);
+  slider.parent('slider-wrapper').addClass('slider').input(newCube);
 
   // the label of order
-  orderLabel = createP(slider.value() + 'x' + slider.value());
-  orderLabel.parent('order-label-wrapper');
+  orderLabel = createP(slider.value() + 'x' + slider.value())
+    .parent('order-label-wrapper');
 
-  spdModeChkBox = select('#spd-chkbox');
-  spdModeChkBox.changed(toggleMode);
+  // spd mode box
+  spdModeChkBox = select('#spd-chkbox').changed(toggleMode);
 
   // makes cube
   createCube(order);
@@ -92,7 +90,6 @@ function setup() {
 
   // gives a dummy setup move
   currentMove = new Move();
-
 }
 
 // processes key input
@@ -219,9 +216,9 @@ function draw() {
   }
 
   if (autoAnimating) {
-    // setting auto speed
+    // pulling out move
     let autoMove = autoSequence[0];
-    incremenMoveAngle(autoMove);
+    incremenMoveAngle(true, autoMove);
 
     if (autoMove.doneAnimating()) {
 
@@ -238,7 +235,7 @@ function draw() {
   } else {
     // does the above for the user moves
     if (currentMove.animating) {
-      incremenMoveAngle(currentMove);
+      incremenMoveAngle(spdMode, currentMove);
     }
 
     // checks if the move is done animating

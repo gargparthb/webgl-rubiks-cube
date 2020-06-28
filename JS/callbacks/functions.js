@@ -3,16 +3,16 @@ function calculateLen() {
     len = canvas.width / (4 * order)
 }
 
+// also for scaling
+function calculateStickerOffset() {
+    stickerOffset = 0.2 * len;
+}
+
 // initializes solved color dictionary
 function initializeColorDict() {
     colorDict = [
         color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
     ];
-}
-
-// also for scaling
-function calculateStickerOffset() {
-    stickerOffset = 0.2 * len;
 }
 
 // slider callback
@@ -24,7 +24,7 @@ function newCube() {
     orderLabel.html(this.value() + 'x' + this.value());
 }
 
-// updates the cube with a new layer
+// makes a cube array given the order
 function createCube(n) {
     // clears cube
     cube = [];
@@ -65,6 +65,7 @@ function playMove(move) {
     }
 }
 
+// ends the auto-sequence and adds back the dummy moves
 function finishAutoSequence() {
     // animating flag
     autoAnimating = false;
@@ -146,8 +147,8 @@ function endMove(move) {
 }
 
 // increments the moving layer's angle
-function incremenMoveAngle(move) {
-    if (spdMode) {
+function incremenMoveAngle(speed, move) {
+    if (speed) {
         move.angle += 0.15;
     } else {
         move.angle += 0.1;

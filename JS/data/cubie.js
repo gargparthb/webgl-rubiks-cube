@@ -24,12 +24,17 @@ class Cubie {
       angleMode(RADIANS);
       // even cubes need to be offset to account of invisable layer
       translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z));
+
       if (spdMode) {
         noFill();
       } else {
         fill(0);
       }
-      box(len);
+
+      // the cube for each qb
+      box(len / 2);
+
+      // draws each sticker induvidually
 
       // TOP
       if (this.y == rangeStart) {
@@ -45,7 +50,6 @@ class Cubie {
       if (this.y == rangeEnd) {
         push();
         translate(0, pDist, 0);
-        fill(255, 255, 0);
         fill(this.colors[1])
         rotateX(PI / 2);
         plane(len - stickerOffset, len - stickerOffset, 2);
