@@ -4,6 +4,7 @@ button
     border-color: salmon
     border-radius: 5px
     color: white
+    cursor: pointer
 
     text-align: center
     font-family: monospace
@@ -22,6 +23,18 @@ button
 canvas
     border-radius: 10px
 
+p
+    font-family: monospace
+    color: salmon
+    font-size: xx-large
+    margin: 0px
+
+label
+    font-family: monospace
+    color: salmon
+    font-size: x-large
+    margin-left: 1em
+
 #container
     display: flex
     flex-flow: row nowrap
@@ -33,19 +46,41 @@ canvas
     justify-content: center
     align-items: center
 
+#right-wrapper
+    display: flex
+    flex-flow: column nowrap
+    justify-content: center
+    align-items: center
+    width: 40%
+    margin-left: 5em
+
 #button-wrapper
     display: flex
     flex-flow: row wrap
     justify-content: center
     align-items: center
 
-    margin-left: 5em
-    width: 40%
+#settings-wrapper
+    display: flex
+    flex-flow: column wrap
+    justify-content: center
+    align-items: center
 
-p
+#order-control-wrapper
+    display: flex
+    flex-flow: row nowrap
+    justify-content: center
+    align-items: center
+
+#setting-heading
     font-family: monospace
     color: salmon
-    font-size: xx-large
+    margin: 1.5em 0
 
-#order-label-wrapper
+#slider-wrapper
+    margin-right: 1em
+
+.setting
     margin: 0.5em
+
+label

@@ -14,7 +14,7 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let Rw, Rwi, Lw, Lwi, Uw, Uwi, Dw, Dwi, Fw, Fwi, Bw, Bwi;
 let scrambler, solver;
 let canvas;
-let slider, orderLabel;
+let slider, orderLabel, spdModeChkBox;
 
 // moves
 let rMove, riMove, lMove, liMove;
@@ -24,8 +24,7 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 
 // drawing variables
 let len, stickerOffset;
-
-
+let spdMode = false;
 
 function setup() {
   canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
@@ -49,6 +48,9 @@ function setup() {
   // the label of order
   orderLabel = createP(slider.value() + 'x' + slider.value());
   orderLabel.parent('order-label-wrapper');
+
+  spdModeChkBox = select('#spd-chkbox');
+  spdModeChkBox.changed(toggleMode);
 
   // makes cube
   createCube(order);
@@ -207,9 +209,13 @@ function draw() {
   // allows user pan
   orbitControl(3, 3, 3);
 
-  // gives nicer view
-  rotateX(-PI / 6);
-  rotateY(-PI / 4);
+  // gives better view
+  if (spdMode) {
+    rotateX(-PI / 6)
+  } else {
+    rotateX(-PI / 6);
+    rotateY(-PI / 4);
+  }
 
   // checks if an auto sequence is finished
   if (autoSequence.length == 0) {

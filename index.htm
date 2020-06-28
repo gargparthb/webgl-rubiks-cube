@@ -11,44 +11,53 @@
 
 <body>
   <div id="container">
-    <div id="window-wrapper">
-    </div>
-
-    <div id="button-wrapper">
-      <button id="r">R</button>
-      <button id="ri">R'</button>
-      <button id="rw">Rw</button>
-      <button id="rwi">Rw'</button>
-      <button id="l">L</button>
-      <button id="li">L'</button>
-      <button id="lw">Lw</button>
-      <button id="lwi">Lw'</button>
-      <button id="u">U</button>
-      <button id="ui">U'</button>
-      <button id="uw">Uw</button>
-      <button id="uwi">Uw'</button>
-      <button id="d">D</button>
-      <button id="di">D'</button>
-      <button id="dw">Dw</button>
-      <button id="dwi">Dw'</button>
-      <button id="f">F</button>
-      <button id="fi">F'</button>
-      <button id="fw">Fw</button>
-      <button id="fwi">Fw'</button>
-      <button id="b">B</button>
-      <button id="bi">B'</button>
-      <button id="bw">Bw</button>
-      <button id="bwi">Bw'</button>
-      <button id="x">x</button>
-      <button id="xi">x'</button>
-      <button id="y">y</button>
-      <button id="yi">y'</button>
-      <button id="z">z</button>
-      <button id="zi">z'</button>
-      <button id="solver">Solve</button>
-      <button id="scrambler">Scramble</button>
-      <div id="slider-wrapper"></div>
-      <div id="order-label-wrapper"></div>
+    <div id="window-wrapper"></div>
+    <div id="right-wrapper">
+      <div id="button-wrapper">
+        <button id="r">R</button>
+        <button id="ri">R'</button>
+        <button id="rw">Rw</button>
+        <button id="rwi">Rw'</button>
+        <button id="l">L</button>
+        <button id="li">L'</button>
+        <button id="lw">Lw</button>
+        <button id="lwi">Lw'</button>
+        <button id="u">U</button>
+        <button id="ui">U'</button>
+        <button id="uw">Uw</button>
+        <button id="uwi">Uw'</button>
+        <button id="d">D</button>
+        <button id="di">D'</button>
+        <button id="dw">Dw</button>
+        <button id="dwi">Dw'</button>
+        <button id="f">F</button>
+        <button id="fi">F'</button>
+        <button id="fw">Fw</button>
+        <button id="fwi">Fw'</button>
+        <button id="b">B</button>
+        <button id="bi">B'</button>
+        <button id="bw">Bw</button>
+        <button id="bwi">Bw'</button>
+        <button id="x">x</button>
+        <button id="xi">x'</button>
+        <button id="y">y</button>
+        <button id="yi">y'</button>
+        <button id="z">z</button>
+        <button id="zi">z'</button>
+        <button id="solver">Solve</button>
+        <button id="scrambler">Scramble</button>
+      </div>
+      <h2 id="setting-heading">Settings:</h2>
+      <div id="settings-wrapper">
+        <div class="setting" id="order-control-wrapper">
+          <div id="slider-wrapper"></div>
+          <div id="order-label-wrapper"></div>
+        </div>
+        <div class="setting" id="spd-cube-mode-wrapper">
+          <input type="checkbox" id="spd-chkbox">
+          <label for="spd-chkbox">Speedcubing Mode</label>
+        </div>
+      </div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>

@@ -23,8 +23,12 @@ class Cubie {
       push();
       angleMode(RADIANS);
       // even cubes need to be offset to account of invisable layer
-      translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z))
-      fill(0);
+      translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z));
+      if (spdMode) {
+        noFill();
+      } else {
+        fill(0);
+      }
       box(len);
 
       // TOP

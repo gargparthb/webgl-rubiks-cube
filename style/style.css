@@ -4,6 +4,7 @@ button {
   border-color: salmon;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
   text-align: center;
   font-family: monospace;
   font-size: large;
@@ -22,6 +23,20 @@ button:hover {
 
 canvas {
   border-radius: 10px;
+}
+
+p {
+  font-family: monospace;
+  color: salmon;
+  font-size: xx-large;
+  margin: 0px;
+}
+
+label {
+  font-family: monospace;
+  color: salmon;
+  font-size: x-large;
+  margin-left: 1em;
 }
 
 #container {
@@ -50,6 +65,24 @@ canvas {
           align-items: center;
 }
 
+#right-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40%;
+  margin-left: 5em;
+}
+
 #button-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,17 +97,51 @@ canvas {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-left: 5em;
-  width: 40%;
 }
 
-p {
+#settings-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#order-control-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#setting-heading {
   font-family: monospace;
   color: salmon;
-  font-size: xx-large;
+  margin: 1.5em 0;
 }
 
-#order-label-wrapper {
+#slider-wrapper {
+  margin-right: 1em;
+}
+
+.setting {
   margin: 0.5em;
 }
 /*# sourceMappingURL=style.css.map */

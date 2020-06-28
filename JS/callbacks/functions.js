@@ -116,3 +116,7 @@ function drawCube(move) {
         }
     }
 }
+
+function toggleMode() {
+    spdMode = this.checked();
+}
