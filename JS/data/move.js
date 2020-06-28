@@ -6,8 +6,9 @@ class Move {
     this.axis = axis;
     // layer is an array to allow multiple layer movement (rotation, wide moves)
     this.layers = layers;
-    // move data
+    // move direction (+/-)
     this.dir = dir;
+    // the animating parameter
     this.angle = angle;
   }
 

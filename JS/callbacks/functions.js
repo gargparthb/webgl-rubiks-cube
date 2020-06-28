@@ -5,7 +5,7 @@ function calculateLen() {
 
 // also for scaling
 function calculateStickerOffset() {
-    stickerOffset = 0.2 * len;
+    stickerOffset = 0.1 * len;
 }
 
 // initializes solved color dictionary
@@ -87,12 +87,12 @@ function solved() {
     let visible = visibleQbs(cube);
     let reference = visible[0].colors;
 
-    let topColorsSame = visible.filter(c => c.y == rangeStart).map(c => c.colors[0]).every(i => equalColors(i, reference[0]));
-    let bottomColorsSame = visible.filter(c => c.y == rangeEnd).map(c => c.colors[1]).every(i => equalColors(i, reference[1]));
-    let frontColorsSame = visible.filter(c => c.z == rangeEnd).map(c => c.colors[2]).every(i => equalColors(i, reference[2]));
-    let backColorsSame = visible.filter(c => c.z == rangeStart).map(c => c.colors[3]).every(i => equalColors(i, reference[3]));
-    let leftColorsSame = visible.filter(c => c.x == rangeStart).map(c => c.colors[4]).every(i => equalColors(i, reference[4]));
-    let rightColorsSame = visible.filter(c => c.x == rangeEnd).map(c => c.colors[5]).every(i => equalColors(i, reference[5]));
+    let topColorsSame = uniformLayerColor(visible, y, rangeStart, 0, reference);
+    let bottomColorsSame = uniformLayerColor(visible, y, rangeEnd, 1, reference);
+    let frontColorsSame = uniformLayerColor(visible, z, rangeEnd, 2, reference);
+    let backColorsSame = uniformLayerColor(visible, z, rangeStart, 3, reference);
+    let leftColorsSame = uniformLayerColor(visible, x, rangeStart, 4, reference);
+    let rightColorsSame = uniformLayerColor(visible, x, rangeEnd, 5, reference);
 
     return topColorsSame && bottomColorsSame && frontColorsSame && backColorsSame && leftColorsSame && rightColorsSame;
 }
@@ -153,4 +153,13 @@ function incremenMoveAngle(speed, move) {
     } else {
         move.angle += 0.1;
     }
+}
+
+function uniformLayerColor(qbs, axis, layer, side, reference) {
+
+    qbs.filter(qb => qb.axis == layer)
+        .map(qb => qb[side])
+        .every(i => equalColors(i, reference[side]));
+
+    return qbs;
 }
