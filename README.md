@@ -17,5 +17,5 @@ This is an interactive Rubik's Cube, that uses a 3D renderer in the browser
 - Multiple Graphics Options
 
 
-![Cube Screenshot](assets/cube-screenshot.png "Title")
-![Speed Cube Screenshot](assets/spd-cube-screenshot.png "Title")
+![Cube Screenshot](assets/cube-screenshot.png "Title" | width=200)
+![Speed Cube Screenshot](assets/spd-cube-screenshot.png "Title" width=200)
