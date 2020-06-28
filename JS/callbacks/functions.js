@@ -3,6 +3,13 @@ function calculateLen() {
     len = canvas.width / (4 * order)
 }
 
+// initializes solved color dictionary
+function initializeColorDict() {
+    colorDict = [
+        color(255, 255, 255), color(255, 255, 50), color(0, 255, 0), color(0, 0, 255), color(255, 160, 0), color(255, 0, 0)
+    ];
+}
+
 // also for scaling
 function calculateStickerOffset() {
     stickerOffset = 0.2 * len;
@@ -117,6 +124,32 @@ function drawCube(move) {
     }
 }
 
+// changes spd mode on check
 function toggleMode() {
     spdMode = this.checked();
+}
+
+// aligns viewport
+function setView() {
+    if (spdMode) {
+        rotateX(-PI / 5)
+    } else {
+        rotateX(-PI / 6);
+        rotateY(-PI / 4);
+    }
+}
+
+// ends and logs the move
+function endMove(move) {
+    move.toggleAnimation().resetAngle().execute();
+    updateHistory(move);
+}
+
+// increments the moving layer's angle
+function incremenMoveAngle(move) {
+    if (spdMode) {
+        move.angle += 0.15;
+    } else {
+        move.angle += 0.1;
+    }
 }

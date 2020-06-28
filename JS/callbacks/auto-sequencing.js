@@ -27,7 +27,7 @@ function generateScramble() {
   if (!autoAnimating) {
     scramble = [];
     // move count is scaled to the cube order
-    for (let i = 0; i <= (15 * order - 20); i++) {
+    for (let i = 0; i <= (17 * order - 20); i++) {
       let a = randomAxis();
       let l = generateLayer();
       let d = randomDirection();

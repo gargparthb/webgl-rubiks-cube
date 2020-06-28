@@ -211,12 +211,7 @@ function draw() {
   orbitControl(3, 3, 3);
 
   // gives better view
-  if (spdMode) {
-    rotateX(-PI / 6)
-  } else {
-    rotateX(-PI / 6);
-    rotateY(-PI / 4);
-  }
+  setView();
 
   // checks if an auto sequence is finished
   if (autoSequence.length == 0) {
@@ -226,7 +221,7 @@ function draw() {
   if (autoAnimating) {
     // setting auto speed
     let autoMove = autoSequence[0];
-    autoMove.angle += 0.1;
+    incremenMoveAngle(autoMove);
 
     if (autoMove.doneAnimating()) {
 
@@ -243,12 +238,12 @@ function draw() {
   } else {
     // does the above for the user moves
     if (currentMove.animating) {
-      currentMove.angle += 0.1;
+      incremenMoveAngle(currentMove);
     }
 
+    // checks if the move is done animating
     if (currentMove.doneAnimating()) {
-      currentMove.toggleAnimation().resetAngle().execute();
-      updateHistory(currentMove);
+      endMove(currentMove);
     }
 
     drawCube(currentMove);
