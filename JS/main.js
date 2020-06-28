@@ -200,7 +200,7 @@ function windowResized() {
 
 // main draw loop
 function draw() {
-  background(150);
+  background(250, 128, 114);
 
   // allows user pan
   orbitControl();

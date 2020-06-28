@@ -22,60 +22,8 @@ button
         color: salmon
         background-color: white
 
-canvas
-    border-radius: 10px
-
-p
-    font-family: monospace
-    color: salmon
-    font-size: x-large
-    margin: 0px
-
-#container
-    display: flex
-    flex-flow: row nowrap
-    justify-content: center
-    align-items: center
-
-    #window-wrapper
-        width: 50%
-        justify-content: center
-        align-items: center
-
-    #right-wrapper
-        display: flex
-        flex-flow: column nowrap
-        justify-content: center
-        align-items: center
-        width: 40%
-        margin-left: 5em
-
-#button-wrapper
-    display: flex
-    flex-flow: row wrap
-    justify-content: center
-    align-items: center
-
-#settings-wrapper
-    display: flex
-    flex-flow: column wrap
-    justify-content: center
-    align-items: center
-
-#order-control-wrapper
-    display: flex
-    flex-flow: row nowrap
-    justify-content: center
-    align-items: center
-
-#setting-heading
-    font-family: monospace
-    color: salmon
-    margin-top: 1.5em
-    margin-bottom: 0.5em
-
-#slider-wrapper
-    margin-right: 1em
+    #slider-wrapper
+        margin-right: 1em
 
 .setting
     margin: 0.5em
@@ -120,6 +68,9 @@ p
 
         input:checked ~ .checkmark
             background-color: salmon
+
+        input:hover ~ .checkmark
+            background-color: $gray-border
 
         .checkmark
             position: absolute
