@@ -1,3 +1,5 @@
+$gray-border: #ededed
+
 button
     background-color: salmon
     border-style: solid
@@ -26,14 +28,8 @@ canvas
 p
     font-family: monospace
     color: salmon
-    font-size: xx-large
-    margin: 0px
-
-label
-    font-family: monospace
-    color: salmon
     font-size: x-large
-    margin-left: 1em
+    margin: 0px
 
 #container
     display: flex
@@ -41,18 +37,18 @@ label
     justify-content: center
     align-items: center
 
-#window-wrapper
-    width: 50%
-    justify-content: center
-    align-items: center
+    #window-wrapper
+        width: 50%
+        justify-content: center
+        align-items: center
 
-#right-wrapper
-    display: flex
-    flex-flow: column nowrap
-    justify-content: center
-    align-items: center
-    width: 40%
-    margin-left: 5em
+    #right-wrapper
+        display: flex
+        flex-flow: column nowrap
+        justify-content: center
+        align-items: center
+        width: 40%
+        margin-left: 5em
 
 #button-wrapper
     display: flex
@@ -86,23 +82,53 @@ label
 .slider
     appearance: none
     width: 100%
-    height: 25px
-    border-style: solid
-    border-color: #ededed
-    border-width: 1px
+    height: 1.5em
+    border: 1px solid $gray-border
     background: white
     outline: none
 
     &::-webkit-slider-thumb
         appearance: none
         appearance: none
-        width: 25px
-        height: 25px
+        width: 1.5em
+        height: 1.5em
         background: salmon
         cursor: pointer
 
     &::-moz-range-thumb
-        width: 25px
-        height: 25px
+        width: 1.5em
+        height: 1.5em
         background: salmon
         cursor: pointer
+
+#spd-cube-mode-wrapper
+    font-family: monospace
+    color: salmon
+    font-size: x-large
+
+    .check-wrapper
+        position: relative
+        user-select: none
+        cursor: pointer
+
+        .label-text
+            margin-left: 1.75em
+
+        input
+            opacity: 0
+
+        input:checked ~ .checkmark
+            background-color: salmon
+
+        .checkmark
+            position: absolute
+            top: 0
+            left: 0
+            height: 1em
+            width: 1em
+
+            background-color: transparent
+            border: 1px solid $gray-border
+            border-radius: 5px
+
+            transition: all 0.2s ease-out
