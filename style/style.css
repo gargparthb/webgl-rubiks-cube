@@ -144,4 +144,34 @@ label {
 .setting {
   margin: 0.5em;
 }
+
+.slider {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  height: 25px;
+  border-style: solid;
+  border-color: #ededed;
+  border-width: 1px;
+  background: white;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: salmon;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: salmon;
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

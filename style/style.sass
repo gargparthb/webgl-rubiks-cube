@@ -83,4 +83,26 @@ label
 .setting
     margin: 0.5em
 
-label
+.slider
+    appearance: none
+    width: 100%
+    height: 25px
+    border-style: solid
+    border-color: #ededed
+    border-width: 1px
+    background: white
+    outline: none
+
+    &::-webkit-slider-thumb
+        appearance: none
+        appearance: none
+        width: 25px
+        height: 25px
+        background: salmon
+        cursor: pointer
+
+    &::-moz-range-thumb
+        width: 25px
+        height: 25px
+        background: salmon
+        cursor: pointer

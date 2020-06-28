@@ -43,6 +43,7 @@ function setup() {
   // adding slider
   slider = createSlider(2, 5, 3, 1);
   slider.parent('slider-wrapper');
+  slider.addClass('slider')
   slider.input(newCube);
 
   // the label of order
