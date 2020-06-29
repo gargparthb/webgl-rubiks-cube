@@ -1,3 +1,5 @@
+// defines all the program/environment variables
+
 // initializes the array and colors
 let cube = [];
 let colorDict;
@@ -14,7 +16,7 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let Rw, Rwi, Lw, Lwi, Uw, Uwi, Dw, Dwi, Fw, Fwi, Bw, Bwi;
 let scrambler, solver;
 let canvas;
-let slider, orderLabel, spdModeChkBox;
+let slider, orderLabel, spdModeChkBox, timerChkBox;
 
 // moves
 let rMove, riMove, lMove, liMove;
@@ -29,9 +31,9 @@ let spdMode = false;
 function setup() {
   frameRate(60);
 
-  canvas = createCanvas(windowWidth / 2, windowHeight * 19 / 20, WEBGL);
+  canvas = createCanvas(windowWidth / 2, windowHeight * 18 / 20, WEBGL);
   // allows styling
-  canvas.parent('window-wrapper')
+  canvas.parent('canvas-wrapper')
 
   // initilizing drawing variables
   calculateLen();
@@ -48,6 +50,9 @@ function setup() {
 
   // spd mode box
   spdModeChkBox = select('#spd-chkbox').changed(toggleMode);
+
+  // timer checkbox
+  timerChkBox = select('#timer-chkbox');
 
   // makes cube
   createCube(order);

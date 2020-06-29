@@ -28,6 +28,7 @@ class Cubie {
       } else {
         fill(0);
       }
+      noStroke();
 
       // the cube for each qb
       box(len);

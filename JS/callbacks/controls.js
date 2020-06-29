@@ -1,5 +1,6 @@
 function twistX(coord, dir, c) {
   for (qb of c) {
+
     if (qb.x == coord) {
       // saves original position
       let currentY = qb.y;

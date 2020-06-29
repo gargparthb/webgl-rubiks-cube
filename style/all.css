@@ -14,8 +14,15 @@
           align-items: center;
 }
 
-#container #window-wrapper {
+#container #left-wrapper {
   width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -131,7 +138,7 @@ button:hover {
   background-color: white;
 }
 
-button #slider-wrapper {
+#slider-wrapper {
   margin-right: 1em;
 }
 
@@ -167,13 +174,13 @@ button #slider-wrapper {
   cursor: pointer;
 }
 
-#spd-cube-mode-wrapper {
+.setting {
   font-family: monospace;
   color: salmon;
   font-size: x-large;
 }
 
-#spd-cube-mode-wrapper .check-wrapper {
+.setting .check-wrapper {
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -182,23 +189,19 @@ button #slider-wrapper {
   cursor: pointer;
 }
 
-#spd-cube-mode-wrapper .check-wrapper .label-text {
+.setting .check-wrapper .label-text {
   margin-left: 1.75em;
 }
 
-#spd-cube-mode-wrapper .check-wrapper input {
+.setting .check-wrapper input {
   opacity: 0;
 }
 
-#spd-cube-mode-wrapper .check-wrapper input:checked ~ .checkmark {
+.setting .check-wrapper input:checked ~ .checkmark {
   background-color: salmon;
 }
 
-#spd-cube-mode-wrapper .check-wrapper input:hover ~ .checkmark {
-  background-color: #ededed;
-}
-
-#spd-cube-mode-wrapper .check-wrapper .checkmark {
+.setting .check-wrapper .checkmark {
   position: absolute;
   top: 0;
   left: 0;

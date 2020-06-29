@@ -12,7 +12,10 @@
 <body>
   <div id="container">
 
-    <div id="window-wrapper"></div>
+    <div id="left-wrapper">
+      <div id="canvas-wrapper"></div>
+      <div id="time-wrapper"></div>
+    </div>
 
     <div id="right-wrapper">
 
@@ -62,8 +65,16 @@
 
           <div class="setting" id="spd-cube-mode-wrapper">
             <label class="check-wrapper" for="spd-chkbox">
-              <span class="label-text">Speedcubing Mode</span>
+              <span class="label-text">Speed Graphics</span>
               <input type="checkbox" id="spd-chkbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+
+          <div class="setting" id="timer-mode-wrapper">
+            <label for="timer-chkbox" class="check-wrapper">
+              <span class="label-text">Timer</span>
+              <input type="checkbox" id="timer-chkbox">
               <span class="checkmark"></span>
             </label>
           </div>
