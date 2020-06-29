@@ -1,26 +1,3 @@
-// allows for scaling
-function calculateLen() {
-    len = canvas.width / (4 * order)
-}
-
-// also for scaling
-function calculateStickerOffset() {
-    stickerOffset = 0.2 * len;
-}
-
-// initializes solved color dictionary
-function initializeColorDict() {
-    // order - U, D, F, B, L, R
-    colorDict = [
-        color(255, 255, 255),
-        color(255, 255, 50),
-        color(0, 255, 0),
-        color(0, 0, 255),
-        color(255, 160, 0),
-        color(255, 0, 0)
-    ];
-}
-
 // slider callback
 function newCube() {
     // prevents cross algorithms
@@ -128,58 +105,6 @@ function visibleQbs(array) {
     return target;
 }
 
-// iterates through each qb while drawing
-function drawCube(move) {
-    for (qb of cube) {
-        // draws the animating layer if any
-        if (qb.inAnimation(move) && move.animating) {
-            push();
-            move.rotater();
-            qb.draw();
-            pop();
-        } else {
-            qb.draw();
-        }
-    }
-}
-
-// changes spd mode on check
-function toggleMode() {
-    spdMode = this.checked();
-}
-
-// toggles the timer
-function toggleTimer() {
-    timer.mode = this.checked();
-    drawTimer();
-}
-
-// draws dom timer
-function drawTimer() {
-    if (timer.mode) {
-        timerLabel.style('opacity', '1')
-        if (timer.inspecting) {
-            timerLabel.html(timer.inspectCounter);
-        } else if (timer.timing) {
-            timerLabel.html(timer.time);
-        } else {
-            timerLabel.html('Press space to time.');
-        }
-    } else {
-        timerLabel.style('opacity', '0')
-    }
-}
-
-// aligns viewport
-function setView() {
-    if (spdMode) {
-        rotateX(-PI / 5)
-    } else {
-        rotateX(-PI / 6);
-        rotateY(-PI / 4);
-    }
-}
-
 // ends and logs the move
 function endMove(move) {
     move.toggleAnimation().resetAngle().execute();
@@ -189,7 +114,7 @@ function endMove(move) {
 // increments the moving layer's angle
 function incremenMoveAngle(speed, move) {
     if (speed) {
-        move.angle += 0.15;
+        move.angle += 0.2;
     } else {
         move.angle += 0.1;
     }

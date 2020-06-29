@@ -39,3 +39,11 @@ function allNumsBetween(n, m) {
 function last(array) {
     return array[array.length - 1]
 }
+
+function waitFor(condition, callback) {
+    if (!condition()) {
+        window.setTimeout(waitFor.bind(null, condition, callback), 10); /* this checks the flag every 100 milliseconds*/
+    } else {
+        callback();
+    }
+}

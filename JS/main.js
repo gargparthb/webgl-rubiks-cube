@@ -32,7 +32,8 @@ let timer = {
   inspecting: false,
   inspectCounter: 15,
   timing: false,
-  time: 0
+  time: 0,
+  solveFinished: false
 };
 
 function setup() {
@@ -208,6 +209,12 @@ function keyTyped() {
     case 'q':
       playMove(ziMove);
       break;
+  }
+}
+
+function keyPressed() {
+  if (keyCode == SHIFT) {
+    startTimedSolve();
   }
 }
 
