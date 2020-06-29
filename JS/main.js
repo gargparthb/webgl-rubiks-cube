@@ -28,7 +28,7 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 let len, stickerOffset;
 let spdMode = false;
 let timer = {
-  mode: true,
+  mode: false,
   inspecting: false,
   inspectCounter: 15,
   timing: false,
@@ -213,7 +213,7 @@ function keyTyped() {
 }
 
 function keyPressed() {
-  if (keyCode == SHIFT) {
+  if (keyCode == SHIFT && timer.mode) {
     startTimedSolve();
   }
 }

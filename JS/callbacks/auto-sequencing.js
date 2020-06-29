@@ -44,8 +44,10 @@ function generateLayer() {
 
 // starts the auto sequence
 function startScramble() {
-  generateScramble();
-  autoAnimating = true;
+  if (!timer.mode) {
+    generateScramble();
+    autoAnimating = true;
+  }
 }
 
 // reverses history and cancels moves

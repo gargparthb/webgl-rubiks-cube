@@ -44,8 +44,13 @@ function createCube(n) {
 
 // updates moving variable with user's, as long as no other move is occuring
 function playMove(move) {
+    // blocks moves at certain times
     if (!autoAnimating && !currentMove.animating) {
         Object.assign(currentMove, move)
+
+        if (timer.inspecting && !move.isRotation()) {
+            startTiming();
+        }
     }
 }
 

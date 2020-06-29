@@ -18,7 +18,7 @@ function drawTimer() {
         if (timer.inspecting) {
             timerLabel.html(timer.inspectCounter);
         } else if (timer.timing || timer.solveFinished) {
-            timerLabel.html(timer.time);
+            timerLabel.html(displayTime(timer.time));
         } else {
             timerLabel.html('Press shift to time.');
         }
@@ -31,8 +31,7 @@ function drawTimer() {
 function updateTimer() {
     if (timer.inspecting) {
         if (timer.inspectCounter <= 0) {
-            timer.inspecting = false;
-            timer.timing = true;
+            startTiming();
         } else {
             timer.inspectCounter--;
         }
@@ -47,20 +46,20 @@ function updateTimer() {
 
 function startTimedSolve() {
     inspect();
+    waitFor(() => timer.timing, stopwatch);
 }
 
 function inspect() {
     timer.inspecting = true;
-
-    startScramble();
+    generateScramble();
+    autoAnimating = true;
     waitFor(() => !autoAnimating, countdownInspection);
-    waitFor(() => timer.timing, stopwatch);
 }
 
 function countdownInspection() {
     setInterval(function () {
-        drawTimer();
         updateTimer();
+        drawTimer();
     }, 1000);
 }
 
@@ -69,4 +68,9 @@ function stopwatch() {
         drawTimer();
         updateTimer();
     }, 10);
+}
+
+function startTiming() {
+    timer.inspecting = false;
+    timer.timing = true;
 }

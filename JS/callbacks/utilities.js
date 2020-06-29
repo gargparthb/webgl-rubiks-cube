@@ -47,3 +47,16 @@ function waitFor(condition, callback) {
         callback();
     }
 }
+
+function displayTime(n) {
+    let allSeconds = n.toFixed(1);
+    let mins = Math.floor(allSeconds / 60);
+    console.log(mins);
+    let secs = allSeconds - mins * 60;
+
+    if (mins < 1) {
+        return secs;
+    } else {
+        return mins + ":" + secs;
+    }
+}

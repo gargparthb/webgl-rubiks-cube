@@ -72,4 +72,8 @@ class Move {
   doneAnimating() {
     return this.angle >= PI / 2;
   }
+
+  isRotation() {
+    return this.layers.length == order;
+  }
 }
