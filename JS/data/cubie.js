@@ -19,9 +19,7 @@ class Cubie {
       const nDist = (-1 * len / 2) - 1
       const pDist = len / 2 + 1
 
-      noStroke();
       push();
-      angleMode(RADIANS);
       // even cubes need to be offset to account of invisable layer
       translate(translateOffset(this.x), translateOffset(this.y), translateOffset(this.z));
 
