@@ -16,7 +16,7 @@ let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
 let Rw, Rwi, Lw, Lwi, Uw, Uwi, Dw, Dwi, Fw, Fwi, Bw, Bwi;
 let scrambler, solver;
 let canvas;
-let slider, orderLabel, spdModeChkBox, timerChkBox;
+let slider, orderLabel, spdModeChkBox, timerChkBox, timerLabel;
 
 // moves
 let rMove, riMove, lMove, liMove;
@@ -24,9 +24,16 @@ let uMove, uiMove, dMove, diMove;
 let fMove, fiMove, bMove, biMove;
 let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 
-// drawing variables
+// environment variables
 let len, stickerOffset;
 let spdMode = false;
+let timer = {
+  mode: true,
+  inspecting: false,
+  inspectCounter: 15,
+  timing: false,
+  time: 0
+};
 
 function setup() {
   frameRate(60);
@@ -43,16 +50,25 @@ function setup() {
   initializeColorDict();
 
   // adding slider
-  slider = createSlider(1, 5, 3, 1).parent('slider-wrapper').addClass('slider').input(newCube);
+  slider = createSlider(1, 5, 3, 1)
+    .parent('slider-wrapper')
+    .addClass('slider')
+    .input(newCube);
 
   // the label of order
-  orderLabel = createP(slider.value() + 'x' + slider.value()).parent('order-label-wrapper');
+  orderLabel = createP(slider.value() + 'x' + slider.value())
+    .parent('order-label-wrapper');
 
   // spd mode box
-  spdModeChkBox = select('#spd-chkbox').changed(toggleMode);
+  spdModeChkBox = select('#spd-chkbox')
+    .changed(toggleMode);
 
   // timer checkbox
-  timerChkBox = select('#timer-chkbox');
+  timerChkBox = select('#timer-chkbox')
+    .changed(toggleTimer);
+
+  // timer label
+  timerLabel = select('#timer-label');
 
   // makes cube
   createCube(order);
@@ -197,7 +213,7 @@ function keyTyped() {
 
 // reponsive web design
 function windowResized() {
-  resizeCanvas(windowWidth / 2, windowHeight * .95);
+  resizeCanvas(windowWidth / 2, windowHeight * .90);
   // rescales cube
   calculateLen();
   calculateStickerOffset();

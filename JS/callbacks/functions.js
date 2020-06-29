@@ -148,6 +148,28 @@ function toggleMode() {
     spdMode = this.checked();
 }
 
+// toggles the timer
+function toggleTimer() {
+    timer.mode = this.checked();
+    drawTimer();
+}
+
+// draws dom timer
+function drawTimer() {
+    if (timer.mode) {
+        timerLabel.style('opacity', '1')
+        if (timer.inspecting) {
+            timerLabel.html(timer.inspectCounter);
+        } else if (timer.timing) {
+            timerLabel.html(timer.time);
+        } else {
+            timerLabel.html('Press space to time.');
+        }
+    } else {
+        timerLabel.style('opacity', '0')
+    }
+}
+
 // aligns viewport
 function setView() {
     if (spdMode) {

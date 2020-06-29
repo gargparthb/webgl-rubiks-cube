@@ -29,6 +29,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 0.5em;
+  float: left;
 }
 
 #container #right-wrapper {
@@ -45,8 +47,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   width: 40%;
   margin-left: 5em;
+  margin-top: 1em;
+  float: right;
 }
 
 #button-wrapper {
@@ -95,6 +101,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#timer-label {
+  margin: 0.5em;
 }
 
 canvas {
