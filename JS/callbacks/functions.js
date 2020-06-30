@@ -119,7 +119,7 @@ function endMove(move) {
 // increments the moving layer's angle
 function incremenMoveAngle(speed, move) {
     if (speed) {
-        move.angle += 0.2;
+        move.angle += 0.3;
     } else {
         move.angle += 0.1;
     }

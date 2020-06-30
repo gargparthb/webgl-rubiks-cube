@@ -214,6 +214,9 @@ function keyTyped() {
 
 function keyPressed() {
   if (keyCode == SHIFT && timer.mode) {
+    if (timer.solveFinished) {
+      clearTimer();
+    }
     startTimedSolve();
   }
 }

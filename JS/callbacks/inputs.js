@@ -17,8 +17,10 @@ function drawTimer() {
 
         if (timer.inspecting) {
             timerLabel.html(timer.inspectCounter);
-        } else if (timer.timing || timer.solveFinished) {
+        } else if (timer.timing) {
             timerLabel.html(displayTime(timer.time));
+        } else if (timer.solveFinished) {
+            timerLabel.html(displayTime(timer.time) + ' - Press shift to try again.')
         } else {
             timerLabel.html('Press shift to time.');
         }
@@ -39,17 +41,19 @@ function updateTimer() {
         if (!solved(cube)) {
             timer.time += 0.01;
         } else {
-            timer.solveFinished = true;
+            timer.solveFinished = true
+            timer.timing = false;
         }
     }
 }
 
 function startTimedSolve() {
-    inspect();
+    startSolve();
     waitFor(() => timer.timing, stopwatch);
+    waitFor(() => timer.solveFinished, () => drawTimer());
 }
 
-function inspect() {
+function startSolve() {
     timer.inspecting = true;
     generateScramble();
     autoAnimating = true;
@@ -73,4 +77,15 @@ function stopwatch() {
 function startTiming() {
     timer.inspecting = false;
     timer.timing = true;
+}
+
+function clearTimer() {
+    timer = {
+        mode: timerChkBox.checked(),
+        inspecting: false,
+        inspectCounter: 15,
+        timing: false,
+        time: 0,
+        solveFinished: false
+    };
 }
