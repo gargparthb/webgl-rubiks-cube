@@ -6,6 +6,7 @@ class Timer {
 
         // assigned later
         this.inspectionInterval = undefined;
+
         this.time = 0;
         this.timing = false;
 
@@ -46,6 +47,7 @@ class Timer {
                 }
             } else {
                 if (solved(cube)) {
+                    // displays final state
                     this.finished = true;
                     this.timing = false;
                     this.drawTimer();

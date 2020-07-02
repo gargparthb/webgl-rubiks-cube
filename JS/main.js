@@ -1,3 +1,6 @@
+// WEBGL Rubik's Cube created by Parth Garg during the Great Quarantine of 2020
+// make with p5.js   
+
 // defines all the program/environment variables
 
 // initializes the array and colors
