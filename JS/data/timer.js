@@ -5,6 +5,7 @@ class Timer {
         this.inspectionInterval = undefined;
         this.time = 0;
         this.timing = false;
+        this.timeInterval = undefined;
         this.finished = false;
     }
 
@@ -31,9 +32,7 @@ class Timer {
         if (timerMode) {
             if (this.inspecting) {
                 if (this.inspectCounter <= 0) {
-                    this.inspecting = false;
-                    clearInterval(this.inspectionInterval);
-                    this.timing = true;
+                    this.endInspection();
                 } else {
                     this.inspectCounter--;
                 }
@@ -53,6 +52,12 @@ class Timer {
         this.drawTimer();
         waitFor(() => autoAnimating == false, this.countdownInspection.bind(this));
         waitFor(() => this.timing, this.stopwatch.bind(this));
+    }
+
+    endInspection() {
+        this.inspecting = false;
+        clearInterval(this.inspectionInterval);
+        this.timing = true;
     }
 
     countdownInspection() {
