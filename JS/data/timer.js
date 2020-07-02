@@ -48,8 +48,9 @@ class Timer {
             } else {
                 if (solved(cube)) {
                     // displays final state
-                    this.finished = true;
                     this.timing = false;
+                    clearInterval(this.timeInterval);
+                    this.finished = true;
                     this.drawTimer();
                 } else {
                     this.time += 0.1;

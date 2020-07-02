@@ -9,6 +9,7 @@ function toggleTimer() {
 
     if (timerMode) {
         currentTimer = new Timer;
-        currentTimer.drawTimer();
     }
+
+    currentTimer.drawTimer();
 }

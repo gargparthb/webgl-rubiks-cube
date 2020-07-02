@@ -65,7 +65,7 @@ function setup() {
   // timer label
   timerLabel = select('#timer-label');
 
-  // makes cube
+  // makes cube array
   createCube(order);
 
   // giving html buttons functionality by assigning moves
@@ -208,9 +208,10 @@ function keyTyped() {
 
 function keyPressed() {
   if (keyCode == SHIFT && timerMode) {
+    createCube(order)
     generateScramble();
     autoAnimating = true;
-    currentTimer = new Timer();
+    currentTimer = new Timer()
     currentTimer.timeSolve();
   }
 }
