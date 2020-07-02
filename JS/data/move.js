@@ -73,6 +73,7 @@ class Move {
     return this.angle >= PI / 2;
   }
 
+  // allows for rotations during timed inspection
   isRotation() {
     return this.layers.length == order;
   }

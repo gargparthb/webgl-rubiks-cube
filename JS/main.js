@@ -8,8 +8,6 @@ let colorDict;
 let order = 3;
 let rangeStart, rangeEnd;
 
-// initializing move object
-let currentMove;
 
 // getting HTML elements
 let R, Ri, L, Li, U, Ui, D, Di, F, Fi, B, Bi, X, Xi, Y, Yi, Z, Zi;
@@ -28,15 +26,13 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 let len, stickerOffset;
 let spdMode = false;
 let timerMode = false;
-
-let currentTimer;
+let currentTimer; // initializes the timer object
+let currentMove; // initializing move object
 
 function setup() {
-  frameRate(60);
-
   canvas = createCanvas(windowWidth / 2, windowHeight * 18 / 20, WEBGL);
   // allows styling
-  canvas.parent('canvas-wrapper')
+  canvas.parent('canvas-wrapper');
 
   // initilizing drawing variables
   calculateLen();

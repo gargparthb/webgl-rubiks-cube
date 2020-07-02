@@ -6,6 +6,9 @@ function toggleMode() {
 // toggles the timer
 function toggleTimer() {
     timerMode = this.checked();
-    currentTimer = new Timer;
-    currentTimer.drawTimer();
+
+    if (timerMode) {
+        currentTimer = new Timer;
+        currentTimer.drawTimer();
+    }
 }

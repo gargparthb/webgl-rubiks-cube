@@ -91,8 +91,12 @@ function solved() {
 
 // isolates and matches a layer's color to reference
 function uniformLayerColor(qbs, axis, layer, side, reference) {
-    let target = qbs.filter(qb => qb[axis] == layer)
+    let target = qbs
+        // collects layer cubies
+        .filter(qb => qb[axis] == layer)
+        // gets the side colors
         .map(qb => qb.colors[side])
+        // compares all the side colors
         .every(c => equalColors(c, reference[side]))
     return target;
 }
