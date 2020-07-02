@@ -112,4 +112,30 @@ class Move {
     }
 
   }
+
+  // are two moves equal
+  equal(comp) {
+    if (this != undefined && comp != undefined) {
+
+      return (this.axis == comp.axis &&
+        arraysMatch(this.layers.sort(), comp.layers.sort()) &&
+        this.dir == comp.dir);
+
+    } else {
+      return false;
+    }
+  }
+
+  // are two moves inverses of each other
+  inverse(comp) {
+    if (this != undefined && comp != undefined) {
+
+      return (this.axis == comp.axis &&
+        arraysMatch(this.layers.sort(), comp.layers.sort()) &&
+        this.dir == comp.dir * -1);
+
+    } else {
+      return false;
+    }
+  }
 }

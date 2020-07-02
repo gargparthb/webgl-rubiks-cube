@@ -48,14 +48,15 @@ function waitFor(condition, callback) {
     }
 }
 
+// converts raw seconds to a nice string
 function displayTime(n) {
     let allSeconds = n.toFixed(1);
     let mins = Math.floor(allSeconds / 60);
     let secs = allSeconds - mins * 60;
 
     if (mins < 1) {
-        return secs;
+        return secs.toFixed(1);
     } else {
-        return mins + ":" + secs;
+        return `${mins}:${secs.toFixed(1)}`
     }
 }

@@ -54,7 +54,7 @@ function cancel(moves) {
   target = moves.splice(0, 1);
 
   for (move of moves) {
-    if (inverseMoves(last(target), move)) {
+    if (move.inverse(last(target))) {
       target.pop();
     } else {
       target.push(move);
@@ -62,28 +62,13 @@ function cancel(moves) {
   }
 
   for (let i = target.length - 1; i >= 0; i--) {
-    if (equalMoves(target[i - 2], target[i - 1]) && equalMoves(target[i - 1], target[i])) {
+    if (target[i].equal(target[i - 1]) && target[i - 1].equal(target[i - 2])) {
       target[i].dir *= -1;
       target.splice(i - 2, 2);
     }
   }
 
   return target;
-}
-
-function equalMoves(m1, m2) {
-  if (m1 != undefined && m2 != undefined) {
-    return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && m1.dir == m2.dir);
-  } else {
-    return false;
-  }
-}
-
-// are these two moves invereses
-function inverseMoves(m1, m2) {
-  if (m1 != undefined && m2 != undefined) {
-    return (m1.axis == m2.axis && arraysMatch(m1.layers.sort(), m2.layers.sort()) && -1 * m1.dir == m2.dir);
-  }
 }
 
 // starts auto sequence
