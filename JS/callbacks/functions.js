@@ -44,7 +44,7 @@ function createCube(n) {
 
 // updates moving variable with user's, as long as no other move is occuring
 function playMove(move) {
-    // blocks moves at certain times
+    // starts timer on move in inspection
     if (timerMode && !move.isRotation()) {
         currentTimer.endInspection();
     }
@@ -60,17 +60,6 @@ function finishAutoSequence() {
     autoAnimating = false;
     // orginal dummy moves
     autoSequence.push(new Move(true, 'x', [1], 1, 0), new Move(true, 'y', [1], 1, 0));
-}
-
-// adds the move to the history array
-function updateHistory(move) {
-    if (solved(cube)) {
-        // clears if cube is now solved
-        history = [];
-    } else {
-        // adds move copy object
-        history.push(Object.assign({}, move));
-    }
 }
 
 // checks to see if cube is solved
@@ -112,12 +101,6 @@ function visibleQbs(array) {
     }
 
     return target;
-}
-
-// ends and logs the move
-function endMove(move) {
-    move.toggleAnimation().resetAngle().execute();
-    updateHistory(move);
 }
 
 // increments the moving layer's angle

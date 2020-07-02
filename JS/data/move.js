@@ -77,4 +77,40 @@ class Move {
   isRotation() {
     return this.layers.length == order;
   }
+
+  // ends and logs the move
+  end() {
+    this.toggleAnimation().resetAngle().execute().updateHistory();
+  }
+
+  // adds the move to the history array
+  updateHistory() {
+    if (solved(cube)) {
+      // clears if cube is now solved
+      history = [];
+    } else {
+      // adds move copy object
+      history.push(Object.assign({}, this));
+    }
+
+    return this;
+  }
+
+  // iterates through each qb while drawing
+  drawCube(c) {
+
+    for (let qb of c) {
+      // draws the animating layer if any
+      if (qb.inAnimation(this) && this.animating) {
+        push();
+        this.rotater();
+        qb.draw();
+        pop();
+      } else {
+        qb.draw();
+      }
+    }
+
+  }
+
 }

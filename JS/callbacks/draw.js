@@ -21,21 +21,6 @@ function initializeColorDict() {
     ];
 }
 
-// iterates through each qb while drawing
-function drawCube(move) {
-    for (qb of cube) {
-        // draws the animating layer if any
-        if (qb.inAnimation(move) && move.animating) {
-            push();
-            move.rotater();
-            qb.draw();
-            pop();
-        } else {
-            qb.draw();
-        }
-    }
-}
-
 // aligns viewport
 function setView() {
     if (spdMode) {

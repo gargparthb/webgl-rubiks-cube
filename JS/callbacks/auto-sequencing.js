@@ -52,7 +52,7 @@ function startScramble() {
 
 // reverses history and cancels moves
 function generateSolution() {
-  if (!autoAnimating && !solved(cube) && !timer.mode) {
+  if (!autoAnimating && !solved(cube) && !timerMode) {
     let unCancelled = history.map(m => new Move(true, m.axis, m.layers, m.dir * -1, 0)).reverse();
 
     autoSequence = cancel(unCancelled);

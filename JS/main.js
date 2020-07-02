@@ -68,7 +68,7 @@ function setup() {
   // makes cube
   createCube(order);
 
-  // giving html buttons functionality
+  // giving html buttons functionality by assigning moves
   R = select('#r').mouseClicked(() => playMove(rMove));
   Ri = select('#ri').mouseClicked(() => playMove(riMove));
   Rw = select('#rw').mouseClicked(() => playMove(rMove.makeWide()));
@@ -246,14 +246,12 @@ function draw() {
     if (autoMove.doneAnimating()) {
 
       // switching through the auto sequence and saving move for history
-      autoMove.resetAngle().execute();
+      autoMove.resetAngle().execute().updateHistory();
       autoSequence.shift();
-
-      updateHistory(autoMove);
     }
 
     // draws each qb of array with the auto rotation
-    drawCube(autoMove);
+    autoMove.drawCube(cube);
 
   } else {
     // does the above for the user moves
@@ -263,9 +261,9 @@ function draw() {
 
     // checks if the move is done animating
     if (currentMove.doneAnimating()) {
-      endMove(currentMove);
+      currentMove.end();
     }
 
-    drawCube(currentMove);
+    currentMove.drawCube(cube);
   }
 }
