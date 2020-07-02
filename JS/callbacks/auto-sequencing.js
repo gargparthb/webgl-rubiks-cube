@@ -1,25 +1,19 @@
-// auto sequencing constants
+// auto sequencing variables
 let autoSequence = [new Move(true, 'x', [rangeStart], 1, 0), new Move(true, 'y', [rangeStart], 1, 0)];
 let history = [];
 let autoAnimating = false;
 
 
 function randomAxis() {
-  switch (floor(random(0, 3))) {
-    case 0:
-      return 'x';
-      break;
-    case 1:
-      return 'y';
-      break;
-    case 2:
-      return 'z';
-      break;
-  }
+  return random(['x', 'y', 'z']);
 }
 
 function randomDirection() {
   return random([-1, 1]);
+}
+
+function generateLayer() {
+  return [random(removeZero(allNumsBetween(rangeStart, rangeEnd)))];
 }
 
 // generates random scramble
@@ -28,18 +22,15 @@ function generateScramble() {
     scramble = [];
     // move count is scaled to the cube order
     for (let i = 0; i <= (17 * order - 20); i++) {
-      let a = randomAxis();
-      let l = generateLayer();
-      let d = randomDirection();
-      scramble.push(new Move(true, a, l, d, 0));
+      scramble.push(new Move(true,
+        randomAxis(),
+        generateLayer(),
+        randomDirection(),
+        0));
     }
 
     autoSequence = cancel(scramble);
   }
-}
-
-function generateLayer() {
-  return [random(removeZero(allNumsBetween(rangeStart, rangeEnd)))];
 }
 
 // starts the auto sequence
