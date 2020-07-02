@@ -27,14 +27,9 @@ let xMove, xiMove, yMove, yiMove, zMove, ziMove;
 // environment variables
 let len, stickerOffset;
 let spdMode = false;
-let timer = {
-  mode: false,
-  inspecting: false,
-  inspectCounter: 15,
-  timing: false,
-  time: 0,
-  solveFinished: false
-};
+let timerMode = false;
+
+let currentTimer;
 
 function setup() {
   frameRate(60);
@@ -213,11 +208,11 @@ function keyTyped() {
 }
 
 function keyPressed() {
-  if (keyCode == SHIFT && timer.mode) {
-    if (timer.solveFinished) {
-      clearTimer();
-    }
-    startTimedSolve();
+  if (keyCode == SHIFT && timerMode) {
+    generateScramble();
+    autoAnimating = true;
+    currentTimer = new Timer();
+    currentTimer.timeSolve();
   }
 }
 

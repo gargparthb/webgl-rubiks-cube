@@ -42,7 +42,7 @@ function last(array) {
 
 function waitFor(condition, callback) {
     if (!condition()) {
-        window.setTimeout(waitFor.bind(null, condition, callback), 10); /* this checks the flag every 100 milliseconds*/
+        setTimeout(waitFor.bind(null, condition, callback), 10);
     } else {
         callback();
     }
@@ -51,7 +51,6 @@ function waitFor(condition, callback) {
 function displayTime(n) {
     let allSeconds = n.toFixed(1);
     let mins = Math.floor(allSeconds / 60);
-    console.log(mins);
     let secs = allSeconds - mins * 60;
 
     if (mins < 1) {

@@ -46,11 +46,7 @@ function createCube(n) {
 function playMove(move) {
     // blocks moves at certain times
     if (!autoAnimating && !currentMove.animating) {
-        Object.assign(currentMove, move)
-
-        if (timer.inspecting && !move.isRotation()) {
-            startTiming();
-        }
+        Object.assign(currentMove, move);
     }
 }
 

@@ -44,7 +44,7 @@ function generateLayer() {
 
 // starts the auto sequence
 function startScramble() {
-  if (!timer.mode) {
+  if (!timerMode) {
     generateScramble();
     autoAnimating = true;
   }
@@ -97,7 +97,7 @@ function inverseMoves(m1, m2) {
 
 // starts auto sequence
 function startSolution() {
-  if (!solved() && !timer.mode) {
+  if (!solved() && !timerMode) {
     generateSolution();
     autoAnimating = true;
   }
